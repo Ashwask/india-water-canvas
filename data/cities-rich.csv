@@ -1,0 +1,28 @@
+city,state,population_cr,utility,per_capita_supply_lpcd,nrw_pct,daily_demand_mld,stp_utilization_pct,gw_dependency_pct,primary_source,river_grade,notable_event,industrial_cluster,fidelity
+Bengaluru,Karnataka,1.4,BWSSB,~125 (declared) · ~70-90 (slums),~40-50,"~2,100",~700 installed · ~45-60% utilised,~25-30,Cauvery (long-haul ~100+ km · 4-stage pumping),D-E (Vrishabhavathi · Cauvery delta · CPCB),Day-Zero near-miss Mar 2024,Bengaluru SEZ effluent,high
+Chennai,Tamil Nadu,1.1,CMWSSB,~120 (declared) · highly variable,~25-30,"~1,400",~700 installed · ~60-70% utilised,~20-25 (rising in dry years),Veeranam + Krishna + desalination (2 plants 200 MLD),E (Cooum · Adyar · CPCB) · ~D (Cauvery delta tributaries),Chennai Day Zero June 2019,Manali petrochemicals,high
+Hyderabad,Telangana,1.0,HMWSSB,~135 (declared),~25-30,~580 (peak),~770 (capacity) · ~50% utilised,~20-25,Krishna + Godavari (multi-hop) · Mission Bhagiratha pumping,E (Musi · CPCB) · D (Hussain Sagar),Hussain Sagar critical pollution,Patancheru pharma cluster,high
+Delhi,Delhi,3.0,DJB,~225 (highest in India · declared),~40-50,"~4,500","~3,000 installed · ~60% utilised",~10-12 (declining as quality worsens),Bhakra (HP) + Tehri (UK) + Yamuna inter-state + ~20% local GW,E (Yamuna · BOD 50+ vs limit 3 · CPCB worst-in-India),DJB free water 20 KL/HH policy,Wazirpur industrial,high
+Mumbai,Maharashtra,1.85,BMC (Hydraulic Engineer),~150 (declared) · ~80 (slums),~25-30,"~4,200","~2,500 (capacity) · ~50% utilised",~3-5 (low) · primary surface,Tansa + Tulsi + Vihar + Bhatsa + Modak Sagar · 7 lakes · gravity-fed,E (Mithi · CPCB worst-in-Mumbai) · D (Vasai Creek),"Mithi 2005 flood (1,000+ dead)",Mumbai-Thane-Belapur (MIDC),high
+Patna,Bihar,0.25,BUDA · Bihar Urban Dev,~70-90 (low),~50+ (high),~250,~100 (low capacity),~80-90 (high · risky),GW (deep tube wells) + Ganga surface (limited),E (Ganga at Patna · CPCB · BOD critical),As cancer cluster largest in BR + WB,Patna-Muzaffarpur belt,high
+Kanpur,Uttar Pradesh,0.30,Jal Nigam UP · Kanpur Municipal,~120 (declared),~45,~350,~450 (installed) · ~70% utilised,~30,Ganga (Lower Ganga Canal) + GW (deep wells),E (Ganga at Kanpur · CPCB worst-in-UP · Cr peaks documented),400+ tanneries Jajmau,Jajmau tannery belt,high
+Varanasi,Uttar Pradesh,0.16,Jal Nigam UP,,,,,,,,,,medium
+Lucknow,Uttar Pradesh,0.35,Jal Nigam UP,,,,,,,,,,medium
+Ahmedabad,Gujarat,0.85,AMC (Ahmedabad Municipal),,,,,,,,,,medium
+Surat,Gujarat,,,,,,,,,,,,low
+Vapi-Ankleshwar,Gujarat,,,,,,,,,,,,low
+Jaipur,Rajasthan,,,,,,,,,,,,low
+Indore,Madhya Pradesh,,,,,,,,,,,,low
+Bhopal,Madhya Pradesh,,,,,,,,,,,,low
+Pune,Maharashtra,,,,,,,,,,,,low
+Kolkata,West Bengal,,,,,,,,,,,,low
+Bundelkhand,Uttar Pradesh,2.0,,,,,,,,,,,medium
+Marathwada,Maharashtra,1.9,,,,,,,,,,,medium
+Sundarbans,West Bengal,0.45,,,,,,,,,,,medium
+Tirupur,Tamil Nadu,,,,,,,,,,,,low
+Kochi,Kerala,,,,,,,,,,,,low
+Visakhapatnam,Andhra Pradesh,,,,,,,,,,,,low
+Patancheru,Telangana,,,,,,,,,,,,low
+Singrauli,Madhya Pradesh,,,,,,,,,,,,low
+Bhubaneswar,Odisha,,,,,,,,,,,,low
+Trivandrum,Kerala,,,,,,,,,,,,low

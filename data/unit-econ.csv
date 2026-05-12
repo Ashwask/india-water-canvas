@@ -1,0 +1,10 @@
+asset,axis,cost_installed,lifetime_yrs,coverage_at_scale,phase,partners
+Community piezometer,Availability,₹40-60K,7-10,10K wells,Phase 0+1,ACWADAM + state GW depts + IIT-B sensor labs
+Smart-electricity-meter pump,Availability,₹50-100K,10-15,50K Punjab pumps,Phase 1,PSPCL + PAU + ACWADAM + WELL Labs
+Multi-parameter WQ node,Health+Availability,₹60-100K,5-7,5K stations,Phase 0+,CPCB + state PCBs + civic labs
+STP outflow meter,Health,₹2-5L,7-10,2K STPs,Phase 1,Va Tech Wabag + civic-tech + State PCBs
+Glacial lake telemetry,Availability+Impact,₹15-25L per lake,10+,50 lakes,Phase 0,GSI + ICIMOD + IIRS-Dehradun
+NABL reference lab regional,Health,₹3-5 cr setup + ₹1-2 cr/yr,15+,3-5 labs national,Phase 1,civic-anchored Section 8
+Bhujal Jankar training,Availability+Impact,₹50-80K per person,career,500-1K Phase 0,ACWADAM + Springs Initiative + state PHED
+Tank desilting (significant),Availability,₹15-50L per tank,5-8 without maintenance,5-10K tanks national,Phase 2,ATECF + state PWD + farmer cost-share
+Mangrove restoration,Health+Impact,₹2-5L per ha,decadal,20-50K ha coastal,Phase 2,Wetlands International + state forest dept + PES

@@ -1,0 +1,48 @@
+entity_class,name,sub_type,primary_water_body
+IMPLEMENTER,Foundation for Ecological Security (FES),impl,aquifers
+IMPLEMENTER,Watershed Organisation Trust (WOTR),impl,aquifers
+IMPLEMENTER,BAIF Development Research Foundation,impl,aquifers
+IMPLEMENTER,PRADAN,impl,aquifers
+IMPLEMENTER,ACWADAM,civic,springsheds
+IMPLEMENTER,WELL Labs,civic,aquifers
+IMPLEMENTER,Veditum India,civic,rivers
+IMPLEMENTER,SANDRP,civic,rivers
+IMPLEMENTER,IndiaWaterPortal (Arghyam programme),civic,aquifers
+IMPLEMENTER,Sehgal Foundation,impl,aquifers
+IMPLEMENTER,WASSAN,impl,aquifers
+IMPLEMENTER,Tarun Bharat Sangh,mass,lakes-tanks
+IMPLEMENTER,Paani Foundation,mass,aquifers
+IMPLEMENTER,Gram Vikas,impl,aquifers
+IMPLEMENTER,AKRSP-I,impl,coastal-estuarine
+IMPLEMENTER,Centre for Environment Concerns (CEC),civic,aquifers
+IMPLEMENTER,MYRADA,impl,aquifers
+IMPLEMENTER,ATREE,research,wetlands
+IMPLEMENTER,Biome Environmental Solutions (Zenrainman/Vishwanath),civic,aquifers
+IMPLEMENTER,WaterAid India,impl,aquifers
+IMPLEMENTER,Wetlands International South Asia,civic,wetlands
+IMPLEMENTER,Centre for Science and Environment (CSE),research,rivers
+IMPLEMENTER,Jaljeevika (Centre for Aquatic Livelihoods),impl,coastal-estuarine
+IMPLEMENTER,Keystone Foundation,impl,springsheds
+FUNDER,JJM 2.0,GOVERNMENT SCHEMES (~₹2.5–3 L cr/yr),aquifers
+FUNDER,MGNREGA water-NRM,GOVERNMENT SCHEMES (~₹2.5–3 L cr/yr),aquifers
+FUNDER,AMRUT 2.0,GOVERNMENT SCHEMES (~₹2.5–3 L cr/yr),urban-drains
+FUNDER,PMKSY,GOVERNMENT SCHEMES (~₹2.5–3 L cr/yr),aquifers
+FUNDER,Namami Gange Phase II,GOVERNMENT SCHEMES (~₹2.5–3 L cr/yr),rivers
+FUNDER,Atal Bhujal Yojana,GOVERNMENT SCHEMES (~₹2.5–3 L cr/yr),aquifers
+FUNDER,World Bank India water,MULTILATERAL / DFI (~₹15–25K cr/yr),aquifers
+FUNDER,ADB India water,MULTILATERAL / DFI (~₹15–25K cr/yr),aquifers
+FUNDER,JICA India water,MULTILATERAL / DFI (~₹15–25K cr/yr),aquifers
+FUNDER,KfW + AFD + GIZ + UNICEF,MULTILATERAL / DFI (~₹15–25K cr/yr),aquifers
+FUNDER,Reliance Foundation,CORPORATE CSR (~₹7–10K cr/yr water+sanitation),aquifers
+FUNDER,HUL,CORPORATE CSR (~₹7–10K cr/yr water+sanitation),aquifers
+FUNDER,ITC Mission Sunehra Kal,CORPORATE CSR (~₹7–10K cr/yr water+sanitation),aquifers
+FUNDER,Tata group (TS+TP+TC+corp),CORPORATE CSR (~₹7–10K cr/yr water+sanitation),aquifers
+FUNDER,L&T,CORPORATE CSR (~₹7–10K cr/yr water+sanitation),urban-drains
+FUNDER,Coca-Cola/PepsiCo,CORPORATE CSR (~₹7–10K cr/yr water+sanitation),aquifers
+FUNDER,Arghyam,INDIAN PHILANTHROPY (~₹250–450 cr/yr water-attributable),aquifers
+FUNDER,ATE Chandra Foundation,INDIAN PHILANTHROPY (~₹250–450 cr/yr water-attributable),lakes-tanks
+FUNDER,Tata Trusts,INDIAN PHILANTHROPY (~₹250–450 cr/yr water-attributable),aquifers
+FUNDER,Premji (APPI + Foundation),INDIAN PHILANTHROPY (~₹250–450 cr/yr water-attributable),aquifers
+FUNDER,Rainmatter Foundation,INDIAN PHILANTHROPY (~₹250–450 cr/yr water-attributable),aquifers
+FUNDER,India Climate Collaborative,INDIAN PHILANTHROPY (~₹250–450 cr/yr water-attributable),aquifers
+FUNDER,Sehgal · Paani · Wipro · HCL · Bharti,INDIAN PHILANTHROPY (~₹250–450 cr/yr water-attributable),aquifers

@@ -1,0 +1,31 @@
+name,category,primary_water_body,states_active,unit_economics,capital_type,track_record,failure_year,source
+Jain Irrigation Systems,drip,aquifers,pan-India,₹40-60K/ha · 5-7 yr lifetime,listed,operational,,NSE filings · MCA
+Netafim India,drip,aquifers,pan-India,₹50-80K/ha · 7-10 yr lifetime,MNC-subsidiary,operational,,industry report
+CRI Pumps,agri-pumps,aquifers,pan-India,₹15-50K/pump · 5-15 yr lifetime,listed,operational,,NSE
+KSB India,pumps,aquifers,pan-India,industrial-grade,MNC-subsidiary,operational,,NSE
+Ion Exchange (India),industrial-treatment,rivers,pan-India,₹2-5L per STP outflow meter,listed,operational,,NSE
+VA Tech Wabag,wastewater-desalination,urban-drains,pan-India + global,"project-based · ₹100-1,000 cr/contract",listed,operational,,NSE
+Thermax,industrial-treatment,urban-drains,pan-India,industrial-grade,listed,operational,,NSE
+Nalco Water (Ecolab),industrial-treatment,urban-drains,pan-India,service-based contracts,MNC-subsidiary,operational,,industry
+Driplex Water Engineering,STP-ETP,urban-drains,pan-India,₹1-50 cr per plant,family-owned,operational,,industry
+ABCO Industries,STP-ETP,urban-drains,pan-India,₹1-30 cr per plant,family-owned,operational,,industry
+Eureka Forbes (Aquaguard),household-RO,aquifers,pan-India,₹15-50K/unit · annual service,family-owned,operational,,industry
+Kent RO Systems,household-RO,aquifers,pan-India,₹10-30K/unit,family-owned,operational,,industry
+Hindustan Unilever (Pureit),household-RO,aquifers,pan-India,₹5-25K/unit,MNC-subsidiary,operational,,NSE
+Genus Power Infrastructure,smart-meter-OEM,aquifers,pan-India,₹3-8K per smart water meter,listed,operational,,NSE
+Itron India,smart-meter-OEM,urban-drains,pan-India,utility-grade,MNC-subsidiary,operational,,industry
+CropIn Technology,agritech-water-advisory,aquifers,pan-India,subscription · ~₹500/farmer/yr,PE-backed,operational,,PE filings
+Aquaconnect,aquaculture-tech,coastal-estuarine,TN+AP+OD+WB,subscription + service,PE-backed,operational,,PE filings
+Skymet,weather-water-advisory,aquifers,pan-India,subscription · ~₹100-500/farmer/yr,PE-backed,operational,,PE filings
+Biome Environmental Solutions,urban-water-design,lakes-tanks,KA + TN + KL,project-based,social-enterprise,operational,,company website
+Sarvajal (Piramal),water-ATM,aquifers,RJ+GJ+UP+MP+JH (peak),₹0.30-1/litre at ATM,social-enterprise,failed,2019,funders-flow.md · Piramal exit announcement
+Spring Health,water-ATM,aquifers,OD+WB+JH (peak),₹0.30-1/litre at ATM,social-enterprise,failed,2019,funders-flow.md · industry post-mortem
+Naandi Foundation Community Water,community-water-purification,aquifers,AP+TS+RJ+MH (peak),community subscription model,social-enterprise,consolidating,,funders-flow.md · NGO scale-back
+Waterlife India,community-water-purification,aquifers,multi-state,community subscription,social-enterprise,consolidating,,industry · mixed track record
+Tata Power Solar (water-positive),climate-water-adjacent,aquifers,pan-India,CSR-bundled,listed,operational,,NSE · CSR filings
+WaterGen India,atmospheric-water-generation,aquifers,pilot · multi-state,₹3-8L per AWG unit,MNC-subsidiary,operational,,industry
+Mekorot India / Israeli desal partnerships,desalination,coastal-estuarine,TN+GJ+MH coast,₹50-100/m³ desal cost,public-private,operational,,state RFPs
+Swiss Re India (parametric flood),water-risk-insurance,rivers,multi-state,parametric premiums,MNC-subsidiary,operational,,industry
+Reliance General (crop+water),water-risk-insurance,aquifers,pan-India,PMFBY-aligned premiums,listed,operational,,NSE
+Ecosense Sustainable Solutions,greywater-recycling,urban-drains,KA+TN+MH,₹2-10L per unit,social-enterprise,operational,,company
+Chembond Water Technologies,greywater-recycling,urban-drains,pan-India,B2B contracts,listed,operational,,NSE

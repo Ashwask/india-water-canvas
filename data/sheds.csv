@@ -1,0 +1,15 @@
+shed_key,shed_label,states,water_status,headline_signal,build_phase,binding_loop
+punjab-haryana,Punjab + Haryana,Punjab; Haryana,critical,Aquifer collapse · 1m/yr fall,Phase 1,R1 free-electricity → GW collapse
+bundelkhand,Bundelkhand,Uttar Pradesh; Madhya Pradesh,critical,Wells dry by February most years,Phase 2,R2 + R5
+ladakh-cold,Ladakh & cold desert,Ladakh; Jammu and Kashmir; Himachal Pradesh,critical,Cryosphere existential,Phase 0,R6 cryosphere
+sundarbans,Sundarbans,West Bengal,critical,Salinity advances 5-10 km/decade,Phase 2,R5 + R6 climate
+gangetic,Indo-Gangetic Plain,Uttar Pradesh; Bihar; Jharkhand; West Bengal,critical,GW + Ganga BOD both critical,Phase 2,R5 + R6
+urban-india,Urban India,Karnataka; Maharashtra; Tamil Nadu; Telangana; Delhi; Gujarat; West Bengal,critical,Day Zero arrives in Tier-1 cities,Phase 0,R2 tank degradation → tanker dependence
+deccan,Deccan & dryland,Telangana; Andhra Pradesh; Maharashtra,critical,60% of wells below recharge,Phase 2,R1 + R2
+thar-aravalli,Thar & Aravalli,Rajasthan; Gujarat,declining,Johads aging out; practitioners aging,Phase 2,R5 opacity (johad practitioners)
+coast,Coastal India,Kerala; Tamil Nadu; Goa; Odisha,critical,Sea-level + reef bleaching,Phase 3+,R6 climate
+eastern-himalayas,Eastern Himalayas + NE,Arunachal Pradesh; Assam; Meghalaya; Sikkim; Nagaland; Manipur; Mizoram; Tripura,critical,Brahmaputra annual floods,Phase 3+,R6 climate
+western-ghats,Western Ghats,Karnataka; Kerala; Goa; Maharashtra,declining,Lean-season flow loss,Phase 3+,R6 climate
+nilgiris,Nilgiris,Tamil Nadu,declining,Springs drying earlier each year,Phase 3+,R5 + R6
+central-tribal,Central tribal belt,Jharkhand; Chhattisgarh; Odisha; Madhya Pradesh,declining,Mining + dam displacement,Phase 3+,R5 + R6 mining-water
+konkan-goa,Konkan & Goa,Maharashtra; Goa,declining,Estuary + reef pressure,Phase 3+,R5 opacity

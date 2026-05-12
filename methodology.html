@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>India Water Canvas — Methodology · how H/A/I scores are derived</title>
+<style>
+:root{--bg:#0D1117;--bg2:#161B22;--bg3:#1C2230;--text:#E6EDF3;--muted:#8B949E;--border:#30363D;--teal:#00BFA5;--coral:#FF5252;--amber:#FFB300;--blue:#4FC3F7;--green:#69F0AE}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font:15px/1.65 Georgia,Cambria,'Times New Roman',serif;max-width:820px;margin:0 auto;padding:48px 28px 80px}
+h1{font:600 30px/1.15 Georgia,serif;color:var(--teal);margin-bottom:8px;letter-spacing:-.01em}
+h2{font:600 21px/1.2 Georgia,serif;color:var(--text);margin:36px 0 12px;border-bottom:1px solid var(--border);padding-bottom:8px}
+h3{font:700 13px/1.3 'Segoe UI',sans-serif;text-transform:uppercase;letter-spacing:.6px;color:var(--teal);margin:24px 0 10px}
+p{margin-bottom:14px;color:var(--text)}
+code,pre{font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:13px;background:var(--bg2);padding:2px 6px;border-radius:3px;color:var(--blue)}
+pre{padding:14px 18px;border:1px solid var(--border);border-radius:6px;overflow-x:auto;line-height:1.55;color:var(--text)}
+.kicker{font:700 11px sans-serif;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);margin-bottom:8px}
+.sub{font-size:14px;color:var(--muted);margin-bottom:24px}
+.warn{background:#FFB30015;border-left:3px solid var(--amber);padding:14px 18px;margin:16px 0;font-size:14px;color:var(--text);border-radius:4px}
+.warn strong{color:var(--amber)}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}
+th,td{padding:8px 12px;border:1px solid var(--border);text-align:left;vertical-align:top}
+th{background:var(--bg2);color:var(--muted);font:700 11px sans-serif;text-transform:uppercase;letter-spacing:.5px}
+td{color:var(--text)}
+ul,ol{margin:0 0 14px 22px;padding:0}
+li{margin-bottom:6px}
+a{color:var(--blue);text-decoration:none;border-bottom:1px dotted var(--blue)}
+a:hover{color:var(--teal);border-bottom-style:solid}
+nav{margin-bottom:32px;padding-bottom:14px;border-bottom:1px solid var(--border);font-size:13px}
+nav a{color:var(--muted);margin-right:14px}
+.formula{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:14px 18px;margin:14px 0;font-family:ui-monospace,monospace;font-size:13px;line-height:1.7;color:var(--text)}
+.formula b{color:var(--teal)}
+.axis-h{color:var(--coral)}
+.axis-a{color:var(--amber)}
+.axis-i{color:var(--blue)}
+footer{margin-top:60px;padding-top:24px;border-top:1px solid var(--border);font-size:12px;color:var(--muted);line-height:1.6}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="dashboard.html">← Dashboard</a>
+  <a href="about.md">About</a>
+  <a href="changelog.md">Changelog</a>
+  <a href="review-log.md">Review log</a>
+  <a href="data/">Open data</a>
+</nav>
+
+<div class="kicker">India Water Canvas · Methodology · v1.0 · 2026-05-08</div>
+<h1>How the Health × Availability × Impact scores are derived</h1>
+<p class="sub">This document is the canonical reference for how each state's H/A/I score is computed. The artefact's credibility rests on this being open, auditable, and contestable. Reviewers comment here. Anyone can fork the spreadsheet, propose new weightings, dispute the math, and replicate or contest the result.</p>
+
+<div class="warn">
+  <strong>v1.0 status:</strong> Methodology is published as <em>author-judgment pending external review</em>. Named methodology reviewers (Mihir Shah, Aditi Mukherji, Veena Srinivasan, Himanshu Thakkar) have been invited; sign-offs pending. Any reviewer dissent is recorded publicly in <a href="review-log.md">review-log.md</a>. The dashboard's footer + caution flag this state explicitly.
+</div>
+
+<h2>1 · The three axes — definitions</h2>
+<p>The artefact treats Health, Availability, and Impact as conceptually distinct axes. Each is composed only of parameters belonging to its definition. This separation matters: a state can have stable Availability but collapsing Health (Bengaluru) or vice versa.</p>
+
+<h3>Health · the state of the water itself</h3>
+<p>Water quality parameters and ecosystem state. <strong>Not</strong> human-health consequences (those sit under Impact).</p>
+<ul>
+  <li>Geogenic contaminants — arsenic (As), fluoride (F), uranium (U), nitrate (NO₃), pesticide residues</li>
+  <li>Microbiological + organic load — BOD (biochemical oxygen demand), DO (dissolved oxygen), faecal coliform</li>
+  <li>Industrial pollution — heavy metals (Cr, Pb, Hg), dye effluent, pharmaceutical residues</li>
+  <li>Physical state — salinity (TDS, EC), turbidity, pH, temperature</li>
+  <li>Emerging contaminants — microplastics, PFAS</li>
+  <li>Ecosystem health — lake + wetland area lost since 1990 baseline, springshed perennial vs seasonal rate, river ecosystem health</li>
+</ul>
+
+<h3>Availability · the quantity + reliability of water reaching its intended use</h3>
+<ul>
+  <li>Per-capita freshwater (m³/yr)</li>
+  <li>% blocks safe / over-exploited (CGWB GEC classification)</li>
+  <li>Surface storage stress (reservoir level vs design capacity)</li>
+  <li>Springshed perennial rate</li>
+  <li>Tank cascade functional rate</li>
+  <li>JJM tap functionality (does the infrastructure actually deliver?)</li>
+  <li>NRW (non-revenue water) loss in urban systems</li>
+  <li>Seasonal reliability + climate-stationarity of supply</li>
+</ul>
+
+<h3>Impact · the human, economic, and climate consequence</h3>
+<ul>
+  <li>Population at risk in critical-classified zones</li>
+  <li>Climate vulnerability composite (cyclone + GLOF + sea-level rise + drought exposure)</li>
+  <li>Economic exposure (% state GDP at water-risk · agricultural output exposure)</li>
+  <li>Marginalised groups disproportionately affected — caste-disaggregated water access · women's water-fetching cost · urban informal · displaced communities · tribal commons</li>
+  <li>Sewage-borne disease load</li>
+  <li>Geogenic-exposure-driven health burden — As-induced cancer, F-induced fluorosis, U-induced kidney damage</li>
+</ul>
+
+<h2>2 · The formulas</h2>
+
+<h3>Health score (0–100, lower = worse) — state of the water itself</h3>
+<div class="formula">
+  <span class="axis-h">Health</span> = 100<br>
+  &nbsp;&nbsp;&minus; <b>geogenic_penalty</b> · As + F + U + NO₃ + pesticides exposure<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;weighted by % population on contaminated source water · max <b>25</b><br>
+  &nbsp;&nbsp;&minus; <b>microbiological_penalty</b> · river BOD &gt; limit · faecal coliform load<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;weighted by % population dependent on basin · max <b>20</b><br>
+  &nbsp;&nbsp;&minus; <b>industrial_pollution</b> · named cluster cities × discharge severity<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;Cr / Pb / Hg / pharma / dye · max <b>15</b><br>
+  &nbsp;&nbsp;&minus; <b>salinity_penalty</b> · % land area + coastal districts affected<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;by salinity intrusion · max <b>15</b><br>
+  &nbsp;&nbsp;&minus; <b>ecosystem_loss_penalty</b> · % wetland + lake area lost since 1990<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;springshed perennial → seasonal rate · max <b>15</b><br>
+  &nbsp;&nbsp;&minus; <b>emerging_contam</b> · microplastics + PFAS data presence /<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;monitoring rate (proxy for unmonitored exposure) · max <b>10</b>
+</div>
+<p style="font-size:13px;color:var(--muted)">Note: drinking-water-at-tap functionality is moved out of Health into Availability — functionality is delivery, not the water's intrinsic state.</p>
+
+<h3>Availability score (0–100, lower = worse) — quantity + delivery</h3>
+<div class="formula">
+  <span class="axis-a">Availability</span> = % blocks safe (CGWB GEC, direct contribution) · max <b>35</b><br>
+  &nbsp;&nbsp;+ per-capita freshwater (m³/yr / 5,177 baseline-1951 normalised) · max <b>25</b><br>
+  &nbsp;&nbsp;+ surface storage stress (reservoir level vs design) · max <b>10</b><br>
+  &nbsp;&nbsp;+ springshed perennial rate · max <b>10</b><br>
+  &nbsp;&nbsp;+ tank cascade functional rate · max <b>5</b><br>
+  &nbsp;&nbsp;+ JJM tap functionality (% functional, audited not claimed) · max <b>10</b><br>
+  &nbsp;&nbsp;+ climate-stationarity of supply (rainfall variability low?) · max <b>5</b>
+</div>
+
+<h3>Impact score (0–100, lower = worse) — human + economic + climate consequence</h3>
+<div class="formula">
+  <span class="axis-i">Impact</span> = 100<br>
+  &nbsp;&nbsp;&minus; <b>population_at_risk</b> · % pop in critical-classified zones · max <b>25</b><br>
+  &nbsp;&nbsp;&minus; <b>climate_vulnerability</b> · cyclone + GLOF + SLR + drought composite · max <b>20</b><br>
+  &nbsp;&nbsp;&minus; <b>economic_exposure</b> · % state GDP at water-risk · agri output · max <b>15</b><br>
+  &nbsp;&nbsp;&minus; <b>marginalised_affected</b> · caste-disaggregated access ·<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;gender · urban informal · tribal · displaced · max <b>20</b><br>
+  &nbsp;&nbsp;&minus; <b>health_burden</b> · As cancer · F fluorosis · U kidney ·<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;cholera/typhoid/JE/dengue load · max <b>10</b><br>
+  &nbsp;&nbsp;&minus; <b>subsistence_burden</b> · women's water-fetching hours/day ·<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;rural drinking-water tariff burden · max <b>10</b>
+</div>
+
+<h2>3 · Open spreadsheet</h2>
+<p>The full computation per state is open as a CSV. Anyone can fork it, propose new weightings, submit changes via PR.</p>
+<ul>
+  <li><a href="data/h-a-i-derivation.csv">h-a-i-derivation.csv</a> — per-state H/A/I scores with input parameters and source links</li>
+  <li><a href="data/funder-ladder.csv">funder-ladder.csv</a> — 22+ funders × annual ₹ × layer</li>
+  <li><a href="data/intersections.csv">intersections.csv</a> — energy/waste/markets/health KPIs per state</li>
+  <li><a href="data/place-kpis.csv">place-kpis.csv</a> — state-specific intersection numbers</li>
+  <li><a href="data/bottlenecks.csv">bottlenecks.csv</a> — 8 bottlenecks × severity × layer × loop</li>
+  <li><a href="data/unit-econ.csv">unit-econ.csv</a> — 9 unit-economics assets × cost × axis</li>
+  <li><a href="data/sheds.csv">sheds.csv</a> — 14 SHEDS × signals × needs × build phase</li>
+  <li><a href="data/hidden-dynamics.csv">hidden-dynamics.csv</a> — 8 dynamics × severity × axis affected</li>
+</ul>
+
+<h2>4 · Source-data trust grades</h2>
+<p>Per-input-parameter trust grade per <a href="data-and-groundtruth.md">data-and-groundtruth.md</a>:</p>
+<table>
+<tr><th>Parameter</th><th>Source</th><th>Trust</th><th>Lag</th></tr>
+<tr><td>% blocks over-exploited</td><td>CGWB GEC 2023</td><td>silver (direction trustworthy)</td><td>12-18 mo</td></tr>
+<tr><td>Per-capita freshwater</td><td>CWC + Census denominators</td><td>silver</td><td>1-3 yr</td></tr>
+<tr><td>River BOD</td><td>CPCB monitoring stations</td><td>bronze (lab quality varies)</td><td>30-90 days</td></tr>
+<tr><td>JJM functionality</td><td>CAG audit + field surveys</td><td>red (definition slippage)</td><td>2-3 yr post-audit</td></tr>
+<tr><td>Geogenic contamination (As/F/U)</td><td>Academic studies + state PHED</td><td>silver-bronze (state-specific)</td><td>per study</td></tr>
+<tr><td>Salinity intrusion</td><td>INCOIS + ground research</td><td>bronze (sparse coverage)</td><td>per study</td></tr>
+<tr><td>Glacier mass loss</td><td>GSI + ICIMOD</td><td>gold (satellite-confirmed)</td><td>annual</td></tr>
+<tr><td>Cyclone vulnerability</td><td>IMD + INCOIS</td><td>gold</td><td>real-time</td></tr>
+<tr><td>OCEMS industrial discharge</td><td>State PCBs (legally restricted)</td><td>red (politically captured)</td><td>real-time within agency</td></tr>
+</table>
+
+<h2>5 · Limitations</h2>
+<ul>
+  <li>Author judgment: weightings within each axis are author-judgment-pending-review. Reviewer feedback may shift these substantially.</li>
+  <li>Aggregation: state-level scoring papers over basin-level + district-level + ward-level variation. A state-level Health of 38 hides ward-level scores ranging from 18 to 70.</li>
+  <li>Confidence interval: ±15 points per axis-state combination is the author's honest uncertainty band.</li>
+  <li>Source heterogeneity: some parameters draw from gold-trust sources (IMD, GSI), others from red-trust sources (OCEMS, JJM functionality). The composite mixes these.</li>
+  <li>Temporal mismatch: parameters update on different cycles (CGWB GEC 2-3 yr, CPCB monthly, IMD daily). The H/A/I composite represents a recent snapshot, not a single calendar year.</li>
+  <li>Missing data: some states have sparse parameter coverage; the formula falls back to category-mean defaults, marked in the spreadsheet.</li>
+</ul>
+
+<h2>6 · Reviewer feedback log</h2>
+<p>Reviewer feedback received and incorporated. See <a href="review-log.md">review-log.md</a> for the full review history.</p>
+<p style="font-size:13px;color:var(--muted)"><em>v1.0: invitations open, no sign-offs received yet. Methodology is published with this status flagged on the dashboard.</em></p>
+
+<h2>7 · How to contribute / dispute</h2>
+<ol>
+  <li>Open an issue at <a href="https://github.com/Ashwask/RFPartnerMap/issues" target="_blank">parent repository</a>, title: <code>[Methodology] [your concern]</code></li>
+  <li>State which axis (Health / Availability / Impact), which parameter, what change you propose</li>
+  <li>If proposing a new weighting, attach computation showing the difference in 1-2 example states</li>
+  <li>Author response within 14 days; recorded in review-log.md</li>
+  <li>If accepted, change incorporated in next minor version (v1.x → v1.x+1) with credit + erratum logged</li>
+</ol>
+
+<footer>
+  India Water Canvas · v1.0 · 2026-05-08 · CC BY-NC 4.0 · Ashwin Kulkarni · <a href="dashboard.html">← Dashboard</a> · <a href="about.md">About</a>
+</footer>
+
+</body>
+</html>

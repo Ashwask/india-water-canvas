@@ -1,0 +1,13 @@
+field,last_updated,next_due,cadence,owner,source,fidelity,notes
+per-state-H,2026-05-10,2026-11-10,semi-annual,data-steward,CGWB GEC + CPCB,high,Aligned to CGWB annual yearbook release (semi-annual)
+per-state-A,2026-05-10,2026-11-10,semi-annual,data-steward,CGWB GEC + CWC + CAG,high,GW stage + per-cap m³ + JJM functional rate
+per-state-I,2026-05-10,2026-11-10,semi-annual,data-steward,IMD + NFHS + IFLR,medium,Population exposure + climate vulnerability composites
+funder-ladder,2026-05-10,2026-08-10,quarterly,data-steward,MCA CSR + sustainability reports,medium,FY-end CSR refresh
+partner-table,2026-05-10,2026-08-10,quarterly,community,Self-reported + ground-truth issues,medium,Community-curated via [Partner-Self-Add] issues
+market-vendors,2026-05-10,2026-08-10,quarterly,community,NSE + MCA + industry,medium,Failed canon (Sarvajal · Spring Health · Naandi · Waterlife) preserved
+audit-claims,2026-05-10,2026-11-10,semi-annual,audit-verifier,CAG + KPMG + DNV + CPCB,variable,Per-entry fidelity in AUDIT_CLAIMS.status
+water-body-statuses,2026-05-10,2027-05-10,annual,data-steward,Place-specific govt + civic sources,medium,Aligned to H/A/I refresh + state ground-truth
+climate-stakes,2026-05-10,2027-05-10,annual,methodology-custodian,IMD + IPCC + ICIMOD,medium,Per-place climate context · refreshed on major reports
+hidden-dynamics,2026-05-10,2027-05-10,annual,methodology-custodian,Folder chapters + observations,low,Structural reads · slow-moving
+hard-questions,2026-05-10,2027-05-10,annual,methodology-custodian,hard-questions.md,medium,12 questions tracked year-on-year
+anchor-commitments,2026-05-10,2026-06-10,monthly,maintainer,Y0 gate signatures,high,Tracked via AUDIT_CLAIMS lane 5 · Y0 milestone Dec 31 2026

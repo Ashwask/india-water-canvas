@@ -1,0 +1,749 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>India's Water landscape — interactive map</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>
+:root{
+  --ink:#16242f;
+  --muted:#5b6b78;
+  --line:#d8dee3;
+  --bg:#fafaf6;
+  --paper:#ffffff;
+  --deep:#0a4870;
+  --water:#1f78b4;
+  --light:#5fa8d3;
+  --pale:#e6f1f8;
+  --critical:#a83030;
+  --declining:#b56a1f;
+  --stable:#5380a8;
+  --improving:#1f7a3d;
+  --phase0:#0a4870;
+  --phase1:#a83030;
+  --phase2:#b56a1f;
+  --funder:#5b3a8c;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;height:100%;background:var(--bg);color:var(--ink);font:14px/1.5 -apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow:hidden}
+.app{display:grid;grid-template-rows:auto 1fr;height:100%}
+
+/* Topbar */
+.topbar{padding:12px 18px;background:var(--paper);border-bottom:1px solid var(--line);display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:center;z-index:1000}
+.brand{font:600 17px/1.1 Georgia,"Times New Roman",serif;color:var(--deep);letter-spacing:-0.005em;white-space:nowrap}
+.brand small{display:block;font:400 11px/1.3 -apple-system,sans-serif;color:var(--muted);font-style:italic;margin-top:2px}
+.pills{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+.pill{padding:6px 13px;background:var(--paper);border:1px solid var(--line);border-radius:14px;font-size:12px;color:var(--muted);cursor:pointer;transition:all .12s;font-weight:500;white-space:nowrap}
+.pill:hover{border-color:var(--water);color:var(--water)}
+.pill.active{background:var(--deep);color:#fff;border-color:var(--deep)}
+.pill.active:hover{background:var(--water);border-color:var(--water);color:#fff}
+.links{display:flex;gap:14px;font-size:12px}
+.links a{color:var(--muted);text-decoration:none;border-bottom:1px solid var(--line);transition:color .12s}
+.links a:hover{color:var(--deep);border-bottom-color:var(--deep)}
+
+/* Main area */
+.main{position:relative;display:grid;grid-template-columns:1fr 380px;height:100%}
+@media (max-width:880px){.main{grid-template-columns:1fr}}
+#map{width:100%;height:100%;background:#dbe7ed}
+.leaflet-container{font-family:inherit;background:#dbe7ed}
+
+/* State path defaults */
+.leaflet-interactive{transition:fill-opacity .12s,stroke-width .12s}
+
+/* Tooltip */
+.leaflet-tooltip{background:rgba(10,72,112,0.94);border:none;color:#fff;font:500 12px/1.3 -apple-system,sans-serif;padding:6px 10px;border-radius:4px;box-shadow:0 2px 12px rgba(0,0,0,0.18)}
+.leaflet-tooltip:before{display:none}
+.leaflet-tooltip strong{display:block;margin-bottom:2px;font-size:13px}
+.leaflet-tooltip em{font-style:normal;color:#cfe1ee;font-size:11px}
+
+/* Markers */
+.marker-dot{width:14px;height:14px;border-radius:50%;border:2px solid #fff;box-shadow:0 1px 6px rgba(0,0,0,0.35);cursor:pointer;transition:transform .12s}
+.marker-dot:hover{transform:scale(1.4)}
+.marker-dot.phase0{background:var(--phase0)}
+.marker-dot.phase1{background:var(--phase1)}
+.marker-dot.phase2{background:var(--phase2)}
+.marker-dot.funder{background:var(--funder);width:10px;height:10px;border-width:1.5px}
+.marker-label{position:absolute;left:18px;top:-2px;background:rgba(255,255,255,0.96);padding:2px 7px;font:500 11px/1.3 -apple-system,sans-serif;color:var(--ink);border-radius:3px;border:1px solid rgba(0,0,0,0.08);white-space:nowrap;pointer-events:none}
+
+/* Sidebar */
+.sidebar{background:var(--paper);border-left:1px solid var(--line);overflow-y:auto;height:100%;padding:0}
+.sb-section{padding:18px 20px;border-bottom:1px solid var(--line)}
+.sb-section:last-child{border-bottom:none}
+.sb-empty{padding:36px 24px;text-align:left;color:var(--muted);font-size:13px;line-height:1.55}
+.sb-empty h3{font:600 14px/1.2 -apple-system,sans-serif;color:var(--deep);text-transform:uppercase;letter-spacing:0.06em;font-size:11px;margin:0 0 12px}
+.sb-empty p{margin:0 0 10px}
+.sb-empty .legend{margin:18px 0 0}
+.legend-row{display:grid;grid-template-columns:18px 1fr;gap:10px;align-items:center;font-size:12px;line-height:1.4;color:var(--muted);padding:5px 0}
+.legend-row .swatch{width:14px;height:14px;border-radius:2px;border:1px solid rgba(0,0,0,0.08)}
+.legend-row .swatch.dot{border-radius:50%;border:1.5px solid #fff;box-shadow:0 0 0 1px rgba(0,0,0,0.12)}
+.legend-row b{color:var(--ink);font-weight:600}
+
+/* Detail header */
+.det-head{padding:18px 20px 14px;border-bottom:1px solid var(--line)}
+.det-kicker{font:500 10px/1.2 -apple-system,sans-serif;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);margin-bottom:6px}
+.det-title{font:600 19px/1.2 Georgia,serif;color:var(--deep);margin:0 0 6px;letter-spacing:-0.005em}
+.det-status{display:inline-block;padding:3px 9px;border-radius:3px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.04em;margin-top:2px}
+.det-status.critical{background:#f8e0e0;color:#8b1f1f}
+.det-status.declining{background:#f5e8cc;color:#7a4f12}
+.det-status.stable{background:#dde6f0;color:#2d4a66}
+.det-status.improving{background:#dce9d6;color:#345f24}
+.det-states{font-size:12px;color:var(--muted);margin-top:8px;line-height:1.5}
+.det-states b{color:var(--ink);font-weight:600}
+
+.det-body{padding:14px 20px}
+.det-body h4{font:600 11px/1.3 -apple-system,sans-serif;text-transform:uppercase;letter-spacing:0.07em;color:var(--muted);margin:14px 0 6px;padding-top:14px;border-top:1px solid var(--line)}
+.det-body h4:first-child{margin-top:0;padding-top:0;border-top:none}
+.det-body p{margin:0 0 9px;font-size:13px;line-height:1.55;color:var(--ink)}
+.det-body ul{margin:4px 0 10px;padding:0 0 0 16px;font-size:13px;line-height:1.55}
+.det-body li{margin:0 0 4px}
+.det-body li b{color:var(--deep)}
+.det-build{margin-top:14px;padding:10px 12px;background:var(--pale);border-left:3px solid var(--water);font-size:12px;line-height:1.5;color:var(--ink)}
+.det-build b{color:var(--deep);display:block;margin-bottom:2px;font-size:12px}
+.close{position:absolute;top:14px;right:14px;width:24px;height:24px;border:none;background:transparent;color:var(--muted);font-size:18px;cursor:pointer;border-radius:3px;line-height:1}
+.close:hover{background:var(--line);color:var(--ink)}
+
+/* Bottom-left mode caption */
+.mode-caption{position:absolute;bottom:14px;left:14px;background:rgba(255,255,255,0.96);border:1px solid var(--line);border-radius:4px;padding:8px 12px;font-size:11px;line-height:1.45;color:var(--muted);max-width:260px;z-index:600;box-shadow:0 1px 6px rgba(0,0,0,0.06)}
+.mode-caption b{color:var(--deep);display:block;margin-bottom:3px;font-size:11px;text-transform:uppercase;letter-spacing:0.06em;font-weight:700}
+
+/* Mobile */
+@media (max-width:880px){
+  .main{grid-template-rows:1fr auto;grid-template-columns:1fr}
+  .sidebar{height:auto;max-height:42vh;border-left:none;border-top:1px solid var(--line)}
+  .topbar{grid-template-columns:1fr;gap:10px;padding:10px 12px}
+  .brand{font-size:15px}
+  .links{justify-content:center}
+  .pills{justify-content:flex-start;overflow-x:auto;padding-bottom:2px}
+}
+</style>
+</head>
+<body>
+<div class="app">
+
+<div class="topbar">
+  <div class="brand">India's Water landscape<small>Interactive map · 14 sheds · 5-phase build · funders</small></div>
+  <div class="pills" id="pills">
+    <button class="pill active" data-mode="criticality">Water criticality</button>
+    <button class="pill" data-mode="phase">Build phases</button>
+    <button class="pill" data-mode="philanthropy">Philanthropy density</button>
+    <button class="pill" data-mode="basin">Basin landscape</button>
+  </div>
+  <div class="links">
+    <a href="dashboard.html">↶ Summary</a>
+    <a href="README.md">Folder</a>
+    <a href="../dashboard.html">Partner map</a>
+  </div>
+</div>
+
+<div class="main">
+  <div id="map"></div>
+  <div class="mode-caption" id="modeCaption">
+    <b>Water criticality</b>
+    State colour reflects the most critical water health indicator from the shed profile (groundwater, river, urban water, springshed, cryosphere, salinity). Click any state for the full water profile + build relevance.
+  </div>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sb-empty" id="empty">
+      <h3>India's water in 14 sheds</h3>
+      <p>This map summarises the diagnostic + build argument across the 14 chapters of the <a href="README.md">Water/ folder</a>. Each shed is a landscape with its own water signature; the colour reflects criticality.</p>
+      <p>Click any state to read its water profile, the build-plan relevance, and the funders working there.</p>
+      <p>Use the topbar to switch between four reading modes: water criticality (default), build-phase pilot sites, philanthropy density, basin/landscape grouping.</p>
+
+      <div class="legend">
+        <div style="font:600 10px/1.2 -apple-system,sans-serif;text-transform:uppercase;letter-spacing:0.07em;color:var(--muted);margin:18px 0 8px">Legend</div>
+        <div class="legend-row" id="leg1"><div class="swatch" style="background:#a83030"></div><div><b>Critical</b> · groundwater, urban, salinity, cryosphere</div></div>
+        <div class="legend-row" id="leg2"><div class="swatch" style="background:#b56a1f"></div><div><b>Declining</b> · springs, rivers, estuaries, traditional systems</div></div>
+        <div class="legend-row" id="leg3"><div class="swatch" style="background:#5380a8"></div><div><b>Stable / mixed</b> · partial signals, recovery in progress</div></div>
+        <div class="legend-row" id="leg4"><div class="swatch dot" style="background:#0a4870"></div><div><b>Phase 0 anchor</b> · Cauvery upper basin · cryosphere standalone</div></div>
+        <div class="legend-row" id="leg5"><div class="swatch dot" style="background:#a83030"></div><div><b>Phase 1 expansion</b> · Punjab demand-side</div></div>
+        <div class="legend-row" id="leg6"><div class="swatch dot" style="background:#5b3a8c"></div><div><b>Funder HQ</b> · Arghyam, ATECF, Tata Trusts, Premji, Rainmatter, ICC</div></div>
+      </div>
+    </div>
+    <div id="detail" style="display:none"></div>
+  </aside>
+</div>
+
+</div>
+
+<script>
+// ============================================================
+// SHEDS — water-relevant subset of the 14-shed array from
+// the parent dashboard.html (lines ~1469-1778). Condensed for
+// the map: water status, water signals, build relevance.
+// ============================================================
+var SHEDS = [
+  {key:'punjab-haryana', label:'Punjab + Haryana', states:['Punjab','Haryana'],
+   status:'critical', headline:'The aquifer collapse', center:[30.5,75.8],
+   signals:[
+     'Groundwater **critical** — 79% of Punjab blocks over-exploited; water table falling 1m/year. 15-20 years to crisis at current rates.',
+     'Free agricultural electricity removes the price signal. ~30M tubewells across India; this region holds the densest unmetered fraction.',
+     'No Rainmatter partner works in Punjab or Haryana. Single largest geography-philanthropy mismatch in Indian water.'
+   ],
+   needs:['Groundwater recharge before the aquifer crashes','Demand-side crop transition (millets / pulses / oilseeds replacing paddy)','Pricing reform tied to measurement infrastructure'],
+   build:'phase1',
+   buildNote:'Phase 1 expansion (Year 2-5). 50K smart-electricity-meter pumps in 2-3 districts (Patiala, Sangrur, Bathinda candidates). The hardest political fight in Indian water; the build cannot avoid it.'},
+
+  {key:'bundelkhand', label:'Bundelkhand', states:['Uttar Pradesh','Madhya Pradesh'],
+   status:'critical', headline:'Drought-proof infrastructure missing', center:[24.8,79.5],
+   signals:[
+     'Per capita water availability 40% below national average. Wells dry by February most years.',
+     'No Rainmatter partner works specifically in Bundelkhand. 20M+ population in compound chronic distress.',
+     'Women walk hours for water but own no water infrastructure — gender as the invisible axis.'
+   ],
+   needs:['Drought-proof water infrastructure at landscape scale','Tank revival adapted for hard-rock geology','Women-owned water-asset titling'],
+   build:'phase2',
+   buildNote:'Phase 2 candidate. The Paani Foundation watershed-mobilisation model adapted for hard-rock geology. Currently absent from any major partner portfolio.'},
+
+  {key:'ladakh-cold', label:'Ladakh & cold desert', states:['Ladakh','Jammu and Kashmir','Himachal Pradesh'],
+   status:'critical', headline:'The cryosphere question', center:[34.2,77.6],
+   signals:[
+     'Himalayan glaciers lost 40% of area. Long-term basin water security depends on cryosphere; cryospheric monitoring within India is paper-thin.',
+     'Traditional water systems (ice stupas, kuls) under climate stress. Tourism + water systems overwhelmed.',
+     'Zero Rainmatter partner presence. South Lhonak (Oct 2023) was forewarned in 2018-2020 academic literature; nobody operationalised.'
+   ],
+   needs:['Glacial lake telemetry (200+ ICIMOD-flagged dangerous lakes)','Ice stupa and kul revival programme','20-year glacier monitoring — existential for Indus basin'],
+   build:'phase0',
+   buildNote:'Phase 0 standalone (Year 0-2). 50-glacial-lake telemetry network at high-priority ICIMOD sites — the cheapest Phase 0 commitment available, ~₹10-15 cr, and one no other actor is positioned to make.'},
+
+  {key:'sundarbans', label:'Sundarbans', states:['West Bengal'],
+   status:'critical', headline:'Salinity advances 5-10 km/decade', center:[21.95,88.9],
+   signals:[
+     'Lost ~210 sq km to sea since 1969. Freshwater zone retreating 5-10 km inland per decade.',
+     'Drinking water **critical**: 70%+ of tube wells produce brackish water. Rainwater harvesting is the only reliable source.',
+     'No partner maps salinity advance. Mangrove planting is photo-op without survival rate data.'
+   ],
+   needs:['Mangrove restoration as storm infrastructure','Rainwater harvesting at household scale','Annual salinity advance map'],
+   build:'phase2'},
+
+  {key:'gangetic', label:'Indo-Gangetic Plain', states:['Uttar Pradesh','Bihar','Jharkhand','West Bengal'],
+   status:'critical', headline:'Groundwater + Ganga both critical', center:[26.5,82.5],
+   signals:[
+     'Water table dropping 1-3m per decade across western UP and Bihar. Arsenic contamination in Bengal — ~50M exposed in Ganga-Brahmaputra plain.',
+     'River water quality **critical**: Ganga BOD exceeds safe limits in 60%+ of monitoring stations. Tributaries are worse.',
+     'When the aquifer crisis surfaces it will affect 200M+ people simultaneously.'
+   ],
+   needs:['Recharge infrastructure at block scale (managed aquifer recharge)','Tributary partner — Gomti, Son, Gandak, Kosi, Damodar','10,000 community piezometers'],
+   build:'phase2'},
+
+  {key:'urban-india', label:'Urban India (Bengaluru, Chennai, etc)', states:['Karnataka','Maharashtra','Tamil Nadu','Telangana','Delhi','Haryana','Gujarat','West Bengal','Uttar Pradesh'],
+   status:'critical', headline:'Day Zero arrives in Tier-1 cities', center:[13.5,77.5],
+   signals:[
+     'Urban water **critical**: Bengaluru groundwater dropped 200ft in 20 years. Chennai 2019 hit Day Zero; Bengaluru near-miss March 2024; Hyderabad on trajectory.',
+     'Urban lakes **critical**: Bengaluru lost 80% of lakes; Mumbai wetlands shrinking 10% per decade.',
+     'Cities generate 70% of GDP, control <1% of public revenue — municipal dependence is a governance trap.'
+   ],
+   needs:['Ward-scale supply transparency (currently impossible to answer in any Indian city)','Urban water utilities combining supply + reuse + recharge','Urban Wetland Protection Act'],
+   build:'phase0',
+   buildNote:'Phase 0 anchor (Year 0-2). Cauvery upper basin (Karnataka portion + Tamil Nadu upper). Bengaluru Day Zero context drives constituency. WELL Labs operating; ACWADAM Karnataka presence; CWMA as decision-interface.'},
+
+  {key:'deccan', label:'Deccan & dryland', states:['Telangana','Andhra Pradesh','Maharashtra'],
+   status:'critical', headline:'60% of wells below recharge', center:[17.0,77.5],
+   signals:[
+     'Groundwater **critical**: over 60% of wells in Marathwada and Rayalaseema have dropped below recharge levels.',
+     'Tank systems declining: 80%+ of traditional tanks in Telangana silted, encroached, or non-functional.',
+     'Caste determines water access, land ownership, and market power — but no partner names this explicitly.'
+   ],
+   needs:['Tank federation model (panchayat-owned, scaled 10×)','Community piezometer network','Millet market-making'],
+   build:'phase2'},
+
+  {key:'thar-aravalli', label:'Thar & Aravalli', states:['Rajasthan','Gujarat','Madhya Pradesh'],
+   status:'declining', headline:'Johads aging out', center:[26.5,73.0],
+   signals:[
+     'Traditional water systems declining: johads, tankas, baoris exist but 70%+ non-functional. Practitioners aging out.',
+     'Groundwater declining: dark-zone blocks expanding. Fluoride contamination affects 11 districts in Rajasthan.',
+     'Solar parks being built on pastoral commons — the clean energy transition is displacing the people who need it most.'
+   ],
+   needs:['School of traditional water harvesting (apprenticeship pairing engineers with master johad/tanka builders)','Aravalli mining violation tracker','Pastoralist Rights Act'],
+   build:'phase2'},
+
+  {key:'coast', label:'Coastal India', states:['Kerala','Tamil Nadu','Karnataka','Goa','Maharashtra','Odisha','West Bengal'],
+   status:'critical', headline:'Sea-level + erosion + coral bleaching', center:[12.0,75.0],
+   signals:[
+     'Sea level rising 3.3mm/year along Indian coast. Sundarbans + Lakshadweep facing submersion within decades.',
+     'Coral reefs **critical**: Gulf of Mannar and Andaman reefs show 30-40% bleaching.',
+     'Cyclone intensity **critical**. Bay of Bengal is ~1.5°C warmer than 30 years ago.'
+   ],
+   needs:['Coastal climate infrastructure fund','Coastline erosion observatory (satellite + ground-truth, ward-level)','Climate relocation protocol'],
+   build:'phase3'},
+
+  {key:'eastern-himalayas', label:'Eastern Himalayas + Northeast', states:['Arunachal Pradesh','Assam','Meghalaya','Sikkim','Nagaland','Manipur','Mizoram','Tripura'],
+   status:'critical', headline:'Brahmaputra annual floods', center:[26.5,93.5],
+   signals:[
+     'Flood frequency **critical**: Assam floods now annual. Brahmaputra erosion displaces 100,000+ people each year.',
+     'Dam-building on the Brahmaputra system is a geopolitical-ecological crisis no partner addresses.',
+     'No long-term hydrological monitoring partner in the region.'
+   ],
+   needs:['Riverbank bioengineering (traditional bamboo + modern geotextiles)','Cross-border river monitoring coalition with Bangladesh + Bhutan','20-year Brahmaputra basin hydrological dataset'],
+   build:'phase3'},
+
+  {key:'western-ghats', label:'Western Ghats', states:['Karnataka','Kerala','Tamil Nadu','Goa','Maharashtra'],
+   status:'declining', headline:'Lean-season flow loss', center:[15.5,75.0],
+   signals:[
+     'River health declining: major west-flowing rivers show rising sediment loads and reduced lean-season flows.',
+     'Rainfall pattern **critical**: extreme rainfall events up 50% since 2000. Dry spells lengthening between monsoon bursts.',
+     'Climate-induced rainfall shift altering hydrology; no partner tracks systematically.'
+   ],
+   needs:['Watershed restoration at landscape scale','Ghats-wide watershed authority (river-basin model, not state-bound)','10-year hydrology monitoring (IMD + IISC + NGOs)'],
+   build:'phase3'},
+
+  {key:'nilgiris', label:'Nilgiris & Cardamom Hills', states:['Tamil Nadu','Kerala','Karnataka'],
+   status:'declining', headline:'Springs drying earlier each year', center:[11.4,76.7],
+   signals:[
+     'Water systems declining: springs and streams drying earlier each year. Plantation water demand exceeds natural recharge.',
+     'High partner density (Keystone, ATREE, NCF) but water-thin specifically.',
+     'Spring dynamics not tracked by any partner.'
+   ],
+   needs:['Springshed inventory at scale (Sikkim methodology applied)','Plantation water-budget regulation','Hill-area aquifer mapping'],
+   build:'phase3'},
+
+  {key:'central-tribal', label:'Central tribal belt', states:['Jharkhand','Chhattisgarh','Odisha','Madhya Pradesh'],
+   status:'declining', headline:'Mining + dam displacement', center:[22.5,82.0],
+   signals:[
+     'Adivasi displacement for mining, dams, and conservation. PESA and FRA exist on paper.',
+     'Sal forests, bauxite plateaus, river valleys — under pressure from extractive industry.',
+     'Naxal conflict a symptom of governance failure.'
+   ],
+   needs:['Adivasi water-commons governance (FRA-for-water analogue)','Mining-dam displacement protocol','Tribal water-rights litigation infrastructure'],
+   build:'phase3'},
+
+  {key:'konkan-goa', label:'Konkan & Goa', states:['Maharashtra','Goa','Karnataka'],
+   status:'declining', headline:'Estuary + reef pressure', center:[15.5,73.5],
+   signals:[
+     'Estuary health declining: major estuaries (Mandovi, Zuari, Karli) show rising pollution and declining fish diversity.',
+     'Coastal erosion declining steadily.',
+     'CRZ compliance **critical**.'
+   ],
+   needs:['Estuary health index (salinity, biodiversity, pollution, water quality)','Estuary pollution audits — name polluters, file complaints','Konkan estuary conservation authority'],
+   build:'phase3'}
+];
+
+// State → shed mapping (for quick state-level color lookup)
+var STATE_TO_SHED = {};
+for (var i = 0; i < SHEDS.length; i++) {
+  for (var j = 0; j < SHEDS[i].states.length; j++) {
+    var st = SHEDS[i].states[j];
+    if (!STATE_TO_SHED[st]) STATE_TO_SHED[st] = [];
+    STATE_TO_SHED[st].push(SHEDS[i].key);
+  }
+}
+
+// Status priority for picking the "most critical" if a state belongs to multiple sheds
+var STATUS_PRIORITY = {critical:4, declining:3, stable:2, improving:1};
+
+function pickPrimaryShed(stateName) {
+  var keys = STATE_TO_SHED[stateName] || [];
+  if (keys.length === 0) return null;
+  var best = null;
+  var bestPri = 0;
+  for (var i = 0; i < keys.length; i++) {
+    var s = SHEDS[findShedIndex(keys[i])];
+    var pri = STATUS_PRIORITY[s.status] || 0;
+    if (pri > bestPri) { bestPri = pri; best = s; }
+  }
+  return best;
+}
+
+function findShedIndex(key) {
+  for (var i = 0; i < SHEDS.length; i++) if (SHEDS[i].key === key) return i;
+  return -1;
+}
+
+// Build-phase markers
+var PHASE_MARKERS = [
+  // Phase 0 — Cauvery upper basin
+  {kind:'phase0', name:'Cauvery upper basin', sub:'Phase 0 anchor pilot · Year 0-2 · ~₹25-50 cr', lat:12.34, lon:76.65, body:'Karnataka portion + Tamil Nadu upper. Basin twin operational with CWMA + Karnataka WRD + BWSSB. 1-2K telemetered wells; 50-station WQ network; springshed inventory; vernacular dashboard; Bengaluru Day Zero context drives constituency. WELL Labs operating; ACWADAM Karnataka presence.'},
+  {kind:'phase0', name:'Bengaluru hub', sub:'Phase 0 founding-team base', lat:12.97, lon:77.59, body:'Founding team Year 0 base. Civic-tech architects from iSPIRT + UPI + ONDC ecosystem. Reference NABL lab. Vernacular UX hub. Connects to Cauvery basin work + Karnataka state partnership.'},
+
+  // Phase 0 — Cryosphere
+  {kind:'phase0', name:'South Lhonak / North Sikkim', sub:'Phase 0 cryosphere telemetry', lat:27.96, lon:88.20, body:'October 2023 GLOF was forewarned in 2018-2020 academic literature; nobody operationalised. ~50-glacial-lake telemetry network at high-priority ICIMOD sites. Cheapest Phase 0 commitment, ~₹10-15 cr standalone.'},
+  {kind:'phase0', name:'Uttarakhand glacial cluster', sub:'Phase 0 cryosphere telemetry', lat:30.5, lon:79.5, body:'Chamoli 2021 + Kedarnath 2013 lessons. Glacial-lake telemetry across Garhwal + Kumaon ICIMOD priority sites. Multi-decade glacier monitoring — existential for Ganga basin.'},
+  {kind:'phase0', name:'Himachal glacial cluster', sub:'Phase 0 cryosphere telemetry', lat:32.2, lon:77.2, body:'Spiti + Lahaul ICIMOD priority sites. Glacier mass loss accelerating; basin water security for Indus tributaries depends on the cryosphere monitoring grid this telemeters.'},
+
+  // Phase 1 — Punjab demand-side
+  {kind:'phase1', name:'Patiala', sub:'Phase 1 demand-side pilot', lat:30.34, lon:76.39, body:'50K smart-electricity-meter integration with agricultural pumps. Pricing-reform partnership held politically open. Punjab Pani Bachao Paise Kamao DBT model as baseline.'},
+  {kind:'phase1', name:'Sangrur', sub:'Phase 1 demand-side pilot', lat:30.25, lon:75.84, body:'Highest-density paddy-electricity-aquifer triangle in the country. Block water-table fall ~1m/yr; 15-20 yrs to crisis. Demand-side crop transition baseline.'},
+  {kind:'phase1', name:'Bathinda', sub:'Phase 1 demand-side pilot', lat:30.21, lon:74.95, body:'Cotton-belt transition opportunity. Smart-meter pilot + millet/pulse procurement + farmer income protection.'},
+
+  // Phase 2 — second-priority basins
+  {kind:'phase2', name:'Bundelkhand water mission', sub:'Phase 2 candidate', lat:25.0, lon:79.5, body:'Hard-rock geology adaptation of Paani Foundation watershed-mobilisation model. Currently absent from any major partner portfolio. 20M+ population.'},
+  {kind:'phase2', name:'Sundarbans salinity grid', sub:'Phase 2 candidate', lat:21.95, lon:88.9, body:'Annual salinity advance mapping + community mangrove nurseries with payment-for-ecosystem-services revenue. 5-10 km/decade salinity advance untracked.'}
+];
+
+// Funder HQ markers
+var FUNDER_MARKERS = [
+  {name:'Arghyam',    sub:'Rohini Nilekani Philanthropies · ~₹40-60 cr/yr',     lat:12.97, lon:77.59, body:'The dominant water-only India funder. Founded 2001 with personal endowment of ₹150 cr. Operates across 22 states. Annual disbursement ~₹40-60 cr. Funds ACWADAM + IndiaWaterPortal + Sehgal + WASSAN + Springs Initiative grantees + multiple academic.'},
+  {name:'ATE Chandra Foundation', sub:'Water bodies rejuvenation · ~₹50-150 cr/yr', lat:19.07, lon:72.87, body:'Closest thing India has to a water-pure philanthropy at meaningful scale. Rejuvenated 5,000+ water bodies impacting 10M people across MH + MP + RJ + KA. Operating model: state-government MoUs + JCB-class earthmoving + farmer cost-share. Operates closer to public-works programme than philanthropy.'},
+  {name:'Tata Trusts', sub:'Water Mission + CSPC · ~₹50-70 cr/yr',  lat:18.92, lon:72.83, body:'Coastal Salinity Prevention Cell (Gujarat, decade+); Mission Garima drought villages; Tata Water Mission. Mature, plural, multi-decade. Partners with FES + WOTR + BAIF + multiple Tata-group CSR routings.'},
+  {name:'Premji (APPI + Foundation)', sub:'Backbone funder · ~₹15-30 cr/yr (water)', lat:12.95, lon:77.62, body:'Funds field organisations doing water (FES, WASSAN, others) at field-action scale. Not water-pure; the largest backbone funder of implementing NGOs that everyone else also funds. Without APPI the bench would be thinner.'},
+  {name:'Rainmatter Foundation', sub:'Climate + livelihoods · ~₹25-50 cr/yr (water)', lat:12.97, lon:77.61, body:'12 water partners directly: Paani Foundation, Biome, Veditum, WELL Labs, Wetlands International, SayTrees, Gram Vikas, CEC, Shivganga, Palar Guttahalli + ecosystem WRI India + CEEW. Distinguishing trait: long-horizon, low-conditionality grants + small-cheque investments.'},
+  {name:'India Climate Collaborative', sub:'Pooled climate philanthropy · ~₹20-50 cr/yr (water)', lat:19.10, lon:72.86, body:'Tata Trusts + Bloomberg + ATE Chandra + Ford + others. Water sits within climate framing. Newer (founded 2020); evolving. ~₹100-200 cr/yr total annual disbursement, water-touching ~₹20-50 cr.'}
+];
+
+// ============================================================
+// MAP INITIALIZATION
+// ============================================================
+var map = L.map('map', {
+  zoomControl:true,
+  attributionControl:false,
+  scrollWheelZoom:true,
+  doubleClickZoom:true
+}).setView([22.5, 80.0], 5);
+
+L.control.attribution({prefix:false}).addAttribution('Geo: India states (simplified) · Water signals: SHEDS array').addTo(map);
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  maxZoom:9,
+  minZoom:4,
+  opacity:0.18,
+  className:'tilelayer-muted'
+}).addTo(map);
+
+var statesLayer = null;
+var phaseLayer = L.layerGroup();
+var funderLayer = L.layerGroup();
+var currentMode = 'criticality';
+
+// State alias normalization (geojson names → SHED state names)
+var STATE_ALIAS = {
+  'Andhra Pradesh':'Andhra Pradesh','Arunachal Pradesh':'Arunachal Pradesh','Assam':'Assam','Bihar':'Bihar',
+  'Chhattisgarh':'Chhattisgarh','Goa':'Goa','Gujarat':'Gujarat','Haryana':'Haryana',
+  'Himachal Pradesh':'Himachal Pradesh','Jharkhand':'Jharkhand','Karnataka':'Karnataka','Kerala':'Kerala',
+  'Madhya Pradesh':'Madhya Pradesh','Maharashtra':'Maharashtra','Manipur':'Manipur','Meghalaya':'Meghalaya',
+  'Mizoram':'Mizoram','Nagaland':'Nagaland','Odisha':'Odisha','Punjab':'Punjab','Rajasthan':'Rajasthan',
+  'Sikkim':'Sikkim','Tamil Nadu':'Tamil Nadu','Telangana':'Telangana','Tripura':'Tripura',
+  'Uttar Pradesh':'Uttar Pradesh','Uttarakhand':'Uttarakhand','West Bengal':'West Bengal',
+  'Delhi':'Delhi','Jammu and Kashmir':'Jammu and Kashmir','Ladakh':'Ladakh',
+  'Andaman and Nicobar Islands':'Andaman and Nicobar Islands','Lakshadweep':'Lakshadweep',
+  'Puducherry':'Puducherry','Chandigarh':'Chandigarh','Dadra and Nagar Haveli and Daman and Diu':'Dadra and Nagar Haveli and Daman and Diu'
+};
+
+function getStateName(props) {
+  var candidates = ['NAME_1','st_nm','ST_NM','name','NAME','State','state'];
+  for (var i = 0; i < candidates.length; i++) {
+    if (props[candidates[i]]) return STATE_ALIAS[props[candidates[i]]] || props[candidates[i]];
+  }
+  return null;
+}
+
+function statusColor(status) {
+  if (status === 'critical') return '#a83030';
+  if (status === 'declining') return '#b56a1f';
+  if (status === 'stable') return '#5380a8';
+  if (status === 'improving') return '#1f7a3d';
+  return '#cdd5dc';
+}
+
+function phaseColor(buildKey) {
+  if (buildKey === 'phase0') return '#0a4870';
+  if (buildKey === 'phase1') return '#a83030';
+  if (buildKey === 'phase2') return '#b56a1f';
+  if (buildKey === 'phase3') return '#7a8a99';
+  return '#cdd5dc';
+}
+
+function philanthropyColor(stateName) {
+  // From funders-flow.md geography heat map
+  var heavy = {'Maharashtra':1,'Karnataka':1,'Madhya Pradesh':1,'Rajasthan':1,'Gujarat':1};
+  var uneven = {'Andhra Pradesh':1,'Telangana':1,'Tamil Nadu':1,'Odisha':1};
+  var under = {'Punjab':1,'Haryana':1,'Bihar':1,'Uttar Pradesh':1,'Jharkhand':1,'Chhattisgarh':1,
+               'Ladakh':1,'Jammu and Kashmir':1,'Himachal Pradesh':1,'Uttarakhand':1,
+               'Arunachal Pradesh':1,'Assam':1,'Meghalaya':1,'Sikkim':1,'Nagaland':1,'Manipur':1,'Mizoram':1,'Tripura':1,
+               'West Bengal':1};
+  if (heavy[stateName]) return '#1f7a3d';
+  if (uneven[stateName]) return '#b56a1f';
+  if (under[stateName]) return '#a83030';
+  return '#cdd5dc';
+}
+
+function basinColor(stateName) {
+  // Basin grouping for visual contrast
+  var basinMap = {
+    'Karnataka':'#1f78b4','Kerala':'#1f78b4','Tamil Nadu':'#1f78b4','Goa':'#1f78b4',
+    'Maharashtra':'#5fa8d3','Andhra Pradesh':'#5fa8d3','Telangana':'#5fa8d3',
+    'Punjab':'#a83030','Haryana':'#a83030',
+    'Rajasthan':'#b56a1f','Gujarat':'#b56a1f',
+    'Uttar Pradesh':'#0a4870','Bihar':'#0a4870','Jharkhand':'#0a4870','West Bengal':'#0a4870',
+    'Madhya Pradesh':'#7a8a99','Chhattisgarh':'#7a8a99','Odisha':'#7a8a99',
+    'Arunachal Pradesh':'#1f7a3d','Assam':'#1f7a3d','Meghalaya':'#1f7a3d','Sikkim':'#1f7a3d',
+    'Nagaland':'#1f7a3d','Manipur':'#1f7a3d','Mizoram':'#1f7a3d','Tripura':'#1f7a3d',
+    'Ladakh':'#5b3a8c','Jammu and Kashmir':'#5b3a8c','Himachal Pradesh':'#5b3a8c','Uttarakhand':'#5b3a8c',
+    'Delhi':'#0a4870'
+  };
+  return basinMap[stateName] || '#cdd5dc';
+}
+
+function styleByMode(stateName) {
+  var mode = currentMode;
+  var color = '#cdd5dc';
+  var fillOpacity = 0.55;
+  if (mode === 'criticality') {
+    var primary = pickPrimaryShed(stateName);
+    color = primary ? statusColor(primary.status) : '#cdd5dc';
+  } else if (mode === 'phase') {
+    var primary2 = pickPrimaryShed(stateName);
+    color = primary2 ? phaseColor(primary2.build) : '#cdd5dc';
+  } else if (mode === 'philanthropy') {
+    color = philanthropyColor(stateName);
+  } else if (mode === 'basin') {
+    color = basinColor(stateName);
+    fillOpacity = 0.45;
+  }
+  return {
+    color:'#ffffff',
+    weight:1,
+    fillColor:color,
+    fillOpacity:fillOpacity
+  };
+}
+
+function highlightStyle() {
+  return {
+    color:'#0a4870',
+    weight:2.5,
+    fillOpacity:0.78
+  };
+}
+
+function bindStateLayer(feature, layer) {
+  var stateName = getStateName(feature.properties);
+  if (!stateName) return;
+  var primary = pickPrimaryShed(stateName);
+  var statusLabel = primary ? primary.status : 'no signal';
+  var shedLabel = primary ? primary.label : '';
+  layer.bindTooltip(
+    '<strong>' + stateName + '</strong><em>' + (shedLabel ? shedLabel + ' · ' : '') + statusLabel + '</em>',
+    {sticky:true, direction:'top', offset:[0,-8]}
+  );
+  layer.on({
+    mouseover:function(e){
+      e.target.setStyle(highlightStyle());
+      e.target.bringToFront();
+    },
+    mouseout:function(e){
+      statesLayer.resetStyle(e.target);
+    },
+    click:function(e){
+      showStateDetail(stateName);
+    }
+  });
+}
+
+function loadStates() {
+  fetch('../india_states_simple.geojson').then(function(r){
+    return r.json();
+  }).then(function(geo){
+    statesLayer = L.geoJSON(geo, {
+      style:function(feature){
+        var stateName = getStateName(feature.properties);
+        return styleByMode(stateName);
+      },
+      onEachFeature:bindStateLayer
+    }).addTo(map);
+  }).catch(function(err){
+    console.error('GeoJSON load failed:', err);
+    document.getElementById('empty').innerHTML += '<p style="color:#a83030;margin-top:14px"><b>Map data unavailable.</b> Could not load <code>../india_states_simple.geojson</code>. The map will work when served alongside the parent dashboard.</p>';
+  });
+}
+
+function refreshStateStyle() {
+  if (!statesLayer) return;
+  statesLayer.eachLayer(function(layer){
+    var stateName = getStateName(layer.feature.properties);
+    layer.setStyle(styleByMode(stateName));
+  });
+}
+
+function buildPhaseMarkers() {
+  for (var i = 0; i < PHASE_MARKERS.length; i++) {
+    var m = PHASE_MARKERS[i];
+    var icon = L.divIcon({
+      className:'',
+      html:'<div class="marker-dot ' + m.kind + '"></div>',
+      iconSize:[14,14],
+      iconAnchor:[7,7]
+    });
+    var marker = L.marker([m.lat, m.lon], {icon:icon}).addTo(phaseLayer);
+    marker.bindTooltip(
+      '<strong>' + m.name + '</strong><em>' + m.sub + '</em>',
+      {direction:'top', offset:[0,-10]}
+    );
+    (function(payload){
+      marker.on('click', function(){ showMarkerDetail(payload, 'phase'); });
+    })(m);
+  }
+}
+
+function buildFunderMarkers() {
+  for (var i = 0; i < FUNDER_MARKERS.length; i++) {
+    var f = FUNDER_MARKERS[i];
+    var icon = L.divIcon({
+      className:'',
+      html:'<div class="marker-dot funder"></div>',
+      iconSize:[10,10],
+      iconAnchor:[5,5]
+    });
+    var marker = L.marker([f.lat, f.lon], {icon:icon}).addTo(funderLayer);
+    marker.bindTooltip(
+      '<strong>' + f.name + '</strong><em>' + f.sub + '</em>',
+      {direction:'top', offset:[0,-8]}
+    );
+    (function(payload){
+      marker.on('click', function(){ showMarkerDetail(payload, 'funder'); });
+    })(f);
+  }
+}
+
+function applyMode(mode) {
+  currentMode = mode;
+  var pills = document.querySelectorAll('.pill');
+  for (var i = 0; i < pills.length; i++) {
+    pills[i].className = pills[i].dataset.mode === mode ? 'pill active' : 'pill';
+  }
+  refreshStateStyle();
+
+  // Layer visibility per mode
+  if (mode === 'phase') {
+    phaseLayer.addTo(map);
+    funderLayer.addTo(map);
+  } else if (mode === 'philanthropy') {
+    map.removeLayer(phaseLayer);
+    funderLayer.addTo(map);
+  } else {
+    map.removeLayer(phaseLayer);
+    map.removeLayer(funderLayer);
+  }
+
+  updateModeCaption(mode);
+}
+
+function updateModeCaption(mode) {
+  var c = document.getElementById('modeCaption');
+  var captions = {
+    criticality:{
+      title:'Water criticality',
+      body:'State colour reflects the most critical water health indicator from the shed profile (groundwater, river, urban water, springshed, cryosphere, salinity). Click any state for the full water profile + build relevance.'
+    },
+    phase:{
+      title:'Build phases',
+      body:'Phase 0 sites in <b>navy</b> (Cauvery upper basin + cryosphere standalone). Phase 1 sites in <b>red</b> (Punjab demand-side). Phase 2 candidates in <b>amber</b>. Funder HQs in <b>purple</b>.'
+    },
+    philanthropy:{
+      title:'Philanthropy density',
+      body:'<b>Green</b> = heavily served (MH/KA/MP/RJ/GJ). <b>Amber</b> = adequate but uneven. <b>Red</b> = chronically under-served — Punjab+Haryana, Bundelkhand, NE, Bihar, Eastern UP, Jharkhand, Ladakh.'
+    },
+    basin:{
+      title:'Basin / landscape grouping',
+      body:'States grouped by water-civilizational region: peninsular, Deccan, Indo-Gangetic, Thar+Aravalli, Eastern hill, central tribal, Himalayan cryosphere. Basin boundaries cut across these — a frame the build inverts deliberately.'
+    }
+  };
+  var cap = captions[mode];
+  c.innerHTML = '<b>' + cap.title + '</b>' + cap.body;
+}
+
+// ============================================================
+// SIDEBAR DETAIL PANELS
+// ============================================================
+function showStateDetail(stateName) {
+  var primary = pickPrimaryShed(stateName);
+  var sb = document.getElementById('detail');
+  document.getElementById('empty').style.display = 'none';
+  sb.style.display = 'block';
+
+  if (!primary) {
+    sb.innerHTML = '<div class="det-head" style="position:relative">' +
+      '<button class="close" onclick="closeDetail()" aria-label="Close">×</button>' +
+      '<div class="det-kicker">State</div>' +
+      '<h2 class="det-title">' + stateName + '</h2>' +
+      '<div class="det-states">No specific water shed profile in the folder. Pan-India work via Veditum, Wetlands International, WELL Labs.</div>' +
+      '</div>';
+    return;
+  }
+
+  var signalsHtml = '<ul>';
+  for (var i = 0; i < primary.signals.length; i++) {
+    signalsHtml += '<li>' + parseBold(primary.signals[i]) + '</li>';
+  }
+  signalsHtml += '</ul>';
+
+  var needsHtml = '<ul>';
+  for (var j = 0; j < primary.needs.length; j++) {
+    needsHtml += '<li>' + parseBold(primary.needs[j]) + '</li>';
+  }
+  needsHtml += '</ul>';
+
+  var buildHtml = '';
+  if (primary.buildNote) {
+    buildHtml = '<div class="det-build"><b>' + buildLabel(primary.build) + '</b>' + primary.buildNote + '</div>';
+  } else {
+    buildHtml = '<div class="det-build"><b>' + buildLabel(primary.build) + '</b>Background work — covered by partners but not a Phase 0 / 1 anchor.</div>';
+  }
+
+  sb.innerHTML =
+    '<div class="det-head" style="position:relative">' +
+      '<button class="close" onclick="closeDetail()" aria-label="Close">×</button>' +
+      '<div class="det-kicker">Shed · ' + stateName + '</div>' +
+      '<h2 class="det-title">' + primary.label + '</h2>' +
+      '<div class="det-status ' + primary.status + '">' + primary.status + '</div>' +
+      '<div class="det-states">' + (primary.headline ? '<b>' + primary.headline + '</b><br>' : '') +
+        '<span style="color:var(--muted)">States: ' + primary.states.join(' · ') + '</span></div>' +
+    '</div>' +
+    '<div class="det-body">' +
+      '<h4>Water signals</h4>' + signalsHtml +
+      '<h4>What is needed</h4>' + needsHtml +
+      buildHtml +
+    '</div>';
+}
+
+function showMarkerDetail(m, kind) {
+  var sb = document.getElementById('detail');
+  document.getElementById('empty').style.display = 'none';
+  sb.style.display = 'block';
+
+  var kicker = kind === 'phase' ? 'Build site' : 'Funder HQ';
+  sb.innerHTML =
+    '<div class="det-head" style="position:relative">' +
+      '<button class="close" onclick="closeDetail()" aria-label="Close">×</button>' +
+      '<div class="det-kicker">' + kicker + '</div>' +
+      '<h2 class="det-title">' + m.name + '</h2>' +
+      '<div class="det-states">' + m.sub + '</div>' +
+    '</div>' +
+    '<div class="det-body">' +
+      '<p>' + m.body + '</p>' +
+    '</div>';
+}
+
+function parseBold(text) {
+  return text.replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>');
+}
+
+function buildLabel(key) {
+  if (key === 'phase0') return 'Phase 0 anchor (Year 0-2, ~₹25-50 cr) — ';
+  if (key === 'phase1') return 'Phase 1 expansion (Year 2-5, ~₹100-250 cr) — ';
+  if (key === 'phase2') return 'Phase 2 candidate (Year 2-5+) — ';
+  if (key === 'phase3') return 'Phase 3+ background (Year 5-10) — ';
+  return 'Build relevance — ';
+}
+
+function closeDetail() {
+  document.getElementById('detail').style.display = 'none';
+  document.getElementById('empty').style.display = 'block';
+}
+
+// ============================================================
+// WIRE UP
+// ============================================================
+loadStates();
+buildPhaseMarkers();
+buildFunderMarkers();
+
+var pillEls = document.querySelectorAll('.pill');
+for (var k = 0; k < pillEls.length; k++) {
+  (function(el){
+    el.addEventListener('click', function(){ applyMode(el.dataset.mode); });
+  })(pillEls[k]);
+}
+</script>
+</body>
+</html>

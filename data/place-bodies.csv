@@ -1,0 +1,78 @@
+state,type,name,status,risk
+Punjab,rivers,Sutlej · Beas · Ravi,declining,Indus Treaty suspended Sep 2025 · headwater dispute
+Punjab,aquifers,Punjab alluvial aquifer,critical,79% blocks over-exploited · 1m/yr fall · uranium Bathinda+Mansa
+Haryana,rivers,Yamuna · Ghaggar,declining,Hindon catastrophic · Western Yamuna Canal stress
+Haryana,aquifers,NCR-shared alluvial,critical,60%+ over-exploited · Karnal-Kurukshetra-Kaithal darkest
+Tamil Nadu,rivers,Cauvery · Vaigai,declining,Cauvery dispute · Mettur-Veeranam stress
+Tamil Nadu,lakes-tanks,Eri tank cascade,critical,~75% lost · Kudimaramath revival weak
+Tamil Nadu,coastal-estuarine,Coromandel + Cauvery delta,stressed,Brackish · sea-level rise · Sterlite Tuticorin
+Tamil Nadu,aquifers,TN groundwater,declining,~40% over-exploited · TN GW Act 2003 partial enforcement
+Telangana,lakes-tanks,Hussain Sagar + tank cascade,critical,80%+ tanks silted/encroached · Hussain Sagar critical
+Telangana,urban-drains,Musi (Hyderabad),critical,Sewage uncontrolled · pharma residues Patancheru
+Telangana,aquifers,Telangana hard-rock,critical,50%+ over-exploited · Mahbubnagar-Wanaparthy darkest · F Nalgonda
+Telangana,rivers,Krishna · Godavari,declining,Over-allocated · Krishna KWDT-II
+Andhra Pradesh,rivers,Krishna · Godavari,declining,Polavaram delays · KWDT-II · Rayalaseema dryland
+Andhra Pradesh,coastal-estuarine,K-G delta + Pulicat,declining,Delta sinking · coastal salinity · BoB cyclones
+Andhra Pradesh,aquifers,Rayalaseema dryland aquifer,critical,F Anantapur-Prakasam-Nellore · uranium pockets · over-exploited
+Maharashtra,rivers,Krishna · Bhima · Godavari · Mithi,declining,Basin sharing · Mithi Mumbai industrial · Mula-Mutha Pune
+Maharashtra,lakes-tanks,Marathwada tanks,declining,Sugar-belt extraction · Paani Foundation + ATECF revival
+Maharashtra,urban-drains,Mumbai-Thane-Belapur · Tarapur,critical,Industrial discharge · Mumbai monsoon flood-flushed
+Maharashtra,coastal-estuarine,Konkan coast,stressed,Sea-level rise · cyclones (Tauktae)
+Madhya Pradesh,lakes-tanks,Bundelkhand water-bodies,critical,Wells dry by Feb · ATECF tank revival 1000+
+Madhya Pradesh,rivers,Narmada · Tapi · Son,declining,Sardar Sarovar · Indira Sagar · sewage Bhopal
+Madhya Pradesh,aquifers,Vindhyan plateau hard-rock,declining,Bundelkhand critical · over-exploitation rising
+Rajasthan,aquifers,Thar + Aravalli aquifers,critical,F 11 dark-zone districts · uranium Bikaner-Ganganagar · NO₃ runoff
+Rajasthan,lakes-tanks,Johads + traditional harvesting,critical,70%+ non-functional · TBS revival ~1000 villages · need 100x scale
+Rajasthan,rivers,Banas · Berach · Sambhar,declining,Sambhar drying · Indira Gandhi Canal · seasonal
+Gujarat,coastal-estuarine,Saurashtra + Kachchh coast,critical,"CSPC decade+ · Saurashtra salinity · sea-level + cyclones (Tauktae, Biparjoy)"
+Gujarat,rivers,Sabarmati · Narmada arc,declining,Sardar Sarovar dependence · Narmada disputes settled
+Gujarat,aquifers,Saurashtra over-exploited,critical,GW market unregulated · Mehsana-Banaskantha F
+Gujarat,urban-drains,Vapi-Ankleshwar industrial,critical,Chemical cocktail · pharma residues · Mundra port discharge
+Uttar Pradesh,rivers,Ganga · Yamuna · Hindon,critical,BOD 50+ Yamuna Delhi-Agra-Mathura · Kanpur tannery Cr · Hindon catastrophic
+Uttar Pradesh,aquifers,Western UP + Bundelkhand alluvial,critical,1-3m/decade fall · Bundelkhand wells Feb-dry · As Eastern UP (Ballia-Ghazipur)
+Uttar Pradesh,urban-drains,22 drains across UP cities,critical,Direct sewage discharge · Singrauli coal-thermal
+Bihar,rivers,Ganga · Kosi · Gandak,critical,BOD critical · sewage uncontrolled · Kosi annual floods
+Bihar,aquifers,Bihar alluvial GW,critical,As-contaminated Bhagalpur-Patna-Munger (~50M exposed in BR+neighbours)
+Bihar,lakes-tanks,Maithili ahar-pyne system,critical,Lost · pukur drying
+Delhi,rivers,Yamuna,critical,BOD 50+ vs limit 3 · DPCC vs CPCB divergence · floodplain encroached
+Delhi,urban-drains,22 drains (Najafgarh · Okhla · Wazirabad),critical,Direct discharge · industrial Naraina
+Delhi,aquifers,NCR shared alluvial,critical,GW critical S+SW Delhi · Yamuna recharge thin
+Karnataka,rivers,Cauvery + tributaries,declining,KRS-Hemavathi-Kabini at threshold · CWMA · Mysore-BLR pumping
+Karnataka,lakes-tanks,Bengaluru lakes,critical,-80% since 1960 · katte revival pilots · Tippagondanahalli sewage
+Karnataka,aquifers,Bengaluru + Kolar GW,critical,200ft drop in 20 yrs · Day-Zero Mar 2024
+Karnataka,springsheds,Western Ghats springs,declining,Discharge falling · forest degradation
+West Bengal,rivers,Hooghly · Ganga,critical,Kolkata STPs critical underperformance · industrial Howrah
+West Bengal,wetlands,Sundarbans mangroves,critical,-210 sq km lost to sea since 1969 · climate refugees ongoing
+West Bengal,coastal-estuarine,Sundarbans + delta,critical,70%+ tubewells brackish · 5-10 km/decade salinity advance
+West Bengal,aquifers,WB alluvial aquifer,critical,As-contaminated · ~50M exposed (worst-in-world records)
+Sikkim,cryosphere,Sikkim Himalayan glaciers,critical,200+ ICIMOD-flagged dangerous lakes · GLOF risk · South Lhonak Oct 2023
+Sikkim,springsheds,Sikkim Spring Atlas,declining,50% mapped springs going seasonal · methodology mature
+Sikkim,rivers,Teesta,critical,Teesta-III destroyed Oct 2023 GLOF · downstream cascade
+Ladakh,cryosphere,Indus headwater glaciers,critical,40% glacier area lost · Indus Treaty suspended Sep 2025
+Ladakh,springsheds,Cold-desert springs (kuls/zings),declining,Spring decline · ice-stupa traditional knowledge under stress
+Ladakh,rivers,Indus + tributaries,declining,Transboundary stress · seasonal flux
+Himachal Pradesh,cryosphere,Himachal glaciers,critical,40% area lost · GLOF risk · cloud-bursts
+Himachal Pradesh,rivers,Sutlej · Beas · Ravi · Yamuna,declining,Bhakra-Pong-Pandoh · hydropower variability
+Himachal Pradesh,springsheds,Spiti + Lahaul + Kinnaur,declining,Kuhls decaying · tourism load · forest fragmentation
+Uttarakhand,cryosphere,Garhwal+Kumaon glaciers,critical,2013 Kedarnath flood (~5K dead) · 2021 Chamoli · GLOF risk
+Uttarakhand,rivers,Ganga upstream · Bhagirathi · Yamunotri,declining,Tehri reservoir · pilgrimage pollution Haridwar-Rishikesh
+Uttarakhand,springsheds,Garhwal + Kumaon springs,declining,50% going seasonal · ICIMOD priority · naula (stone-lined springs) decaying
+Kerala,rivers,Periyar · Pamba,declining,Periyar industrial · Pamba pilgrimage (Sabarimala)
+Kerala,wetlands,Vembanad · Ashtamudi backwaters,critical,Eutrophication · paddy-to-tourism conversion · backwater fragmentation
+Kerala,coastal-estuarine,Kerala 580 km coast,critical,2018-19-24 mudslide-flood-drought · sea-level rise · Kasaragod endosulfan legacy
+Kerala,urban-drains,Eloor-Edayar (Kochi),critical,Industrial · titanium-zircon · pharma
+Odisha,rivers,Mahanadi · Brahmani · Vamsadhara,declining,Mahanadi tribunal active · River Boards Act candidate · industrial Talcher
+Odisha,wetlands,Chilika · Bhitarkanika mangroves,stressed,Lagoon brackish · mangrove stress · cyclone exposure
+Odisha,coastal-estuarine,Odisha cyclone coast,critical,BoB cyclones (Phailin · Hudhud · Fani · Yaas) · 1999 super-cyclone template
+Jharkhand,rivers,Damodar · Subarnarekha,critical,Industrial pollution · CIL coal water consumption · Joda-Barbil iron-ore
+Jharkhand,aquifers,Mining-belt aquifers,critical,Mining contamination · As Sahibganj · iron belt
+Jharkhand,lakes-tanks,Santhal-Pargana traditional water,declining,Tribal water management eroded · adivasi displacement for dams
+Chhattisgarh,rivers,Mahanadi headwaters,declining,Korba thermal cooling · industrial water stress
+Chhattisgarh,aquifers,Plateau hard-rock GW,declining,Industrial water stress · uneven recharge
+Chhattisgarh,lakes-tanks,Tribal water management,declining,Coal mining displacement · contamination
+Assam,rivers,Brahmaputra + tributaries,critical,Annual floods · 100K+ displaced/yr · industrial inflow
+Assam,aquifers,Brahmaputra valley alluvial,critical,As 24+ districts · iron ubiquitous
+Assam,wetlands,Char-chapori riverine + Kaziranga adjacent,stressed,Riverbank erosion · displacement
+Meghalaya,springsheds,Meghalaya Springshed Mission,recovering,Methodology mature · positive precedent · scale to NE
+Meghalaya,rivers,Umiam · Kynshi · Myntdu,stable,Mostly stable · pockets of mining contamination
+Meghalaya,aquifers,Limestone Shillong + Khasi hills,stable,Mining pockets (cement clusters)

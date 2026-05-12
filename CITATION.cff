@@ -1,0 +1,45 @@
+cff-version: 1.2.0
+title: India Water Canvas
+message: |
+  If you use this artefact (data, dashboard, methodology, prose folder, or
+  any derived analysis), please cite as:
+  Kulkarni, A. (2026). India Water Canvas: A public-good commons-infrastructure
+  artefact for India's water situation, systems, and place-based interventions.
+  CC BY-NC 4.0. https://github.com/Ashwask/RFPartnerMap/tree/main/Water
+type: software
+authors:
+  - family-names: Kulkarni
+    given-names: Ashwin
+    affiliation: Independent
+    email: open issue on repository
+repository-code: https://github.com/Ashwask/RFPartnerMap
+repository: https://github.com/Ashwask/RFPartnerMap/tree/main/Water
+url: https://github.com/Ashwask/RFPartnerMap/tree/main/Water
+abstract: |
+  The India Water Canvas is a public-good commons-infrastructure artefact for
+  India's water situation. It maps water Health (state of the water itself),
+  Availability (quantity + delivery), and Impact (human + economic + climate
+  consequence) at state and basin scale. It surfaces six self-reinforcing
+  feedback loops driving water-system degradation; the funder ecosystem
+  (~₹2.5–3.5 lakh crore/year government water spend); a ~₹3,000–5,000 crore/yr
+  capture envelope (disbursement that does not produce its claimed outcome);
+  and a phased civic-side build (~₹500–1,000 crore over 10 years) targeted at
+  the highest-leverage Meadows points. The artefact is multi-audience by
+  design — CSO, NGO, philanthropy, CSR, corporates, government, market
+  entrants, journalists, citizens — with data routing rather than data
+  forking. Written from the underlying 14-chapter prose folder.
+keywords:
+  - India water
+  - public good
+  - commons infrastructure
+  - water health
+  - water availability
+  - water quality
+  - groundwater
+  - water governance
+  - feedback loops
+  - investment thesis
+  - civic infrastructure
+license: CC-BY-NC-4.0
+version: 2.0
+date-released: '2026-05-11'

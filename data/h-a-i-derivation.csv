@@ -1,0 +1,26 @@
+state,health_score,health_geogenic,health_microbiological,health_industrial,health_salinity,health_ecosystem_loss,health_emerging,availability_score,avail_blocks_safe_pct,avail_per_capita_norm,avail_storage,avail_springshed,avail_tank_func,avail_jjm_functional,avail_climate_stable,impact_score,impact_pop_at_risk,impact_climate_vuln,impact_econ_exposure,impact_marginalised,impact_health_burden,impact_subsist_burden,binding_loop,build_phase,note
+Punjab,42,-22,-8,-4,0,-15,-9,12,1,15,0,0,0,8,0,18,-25,-15,-10,-15,-10,-7,R1 free-electricity → GW collapse,Phase 1,79% blocks over-exploited; uranium Bathinda+Mansa
+Haryana,48,-18,-9,-5,0,-12,-8,22,2,18,0,0,0,8,0,25,-22,-13,-10,-15,-9,-6,R1 free-electricity → GW collapse,Phase 1+,Replicate Punjab demand-side model
+Karnataka,48,-12,-15,-12,0,-15,-8,32,5,20,3,0,0,8,2,38,-15,-12,-15,-15,-7,-3,R2 tank degradation → tanker dependence,Phase 0,Bengaluru lakes 80% lost; Cauvery upper basin Phase 0 anchor
+Tamil Nadu,52,-15,-12,-10,-5,-10,-8,38,8,22,4,0,0,8,2,42,-20,-12,-12,-10,-8,-3,R1 + R2,Phase 0+,TN Groundwater Act 2003 partial precedent
+Telangana,38,-22,-12,-15,0,-15,-8,22,3,17,2,0,0,8,2,35,-22,-13,-13,-13,-8,-3,R1 + R2,Phase 2,80%+ tanks non-functional; Patancheru pharma cluster
+Andhra Pradesh,35,-25,-12,-10,-5,-15,-8,25,5,17,3,0,0,8,2,38,-22,-13,-13,-10,-8,-3,R1 + R2,Phase 2,Anantapur fluoride; APWELL precedent
+Maharashtra,48,-12,-15,-15,0,-12,-8,28,4,18,3,0,0,8,2,32,-25,-13,-15,-13,-9,-3,R1 sugar-electricity · R2 tank,Phase 2,Marathwada drought 6/10 yrs; sugar-belt extracts unsustainably
+Madhya Pradesh,55,-15,-12,-10,0,-12,-8,48,15,20,5,0,0,8,2,42,-22,-13,-12,-12,-9,-3,R2 tank degradation,Phase 2,ATECF anchor scaled; Bundelkhand wells dry by Feb
+Rajasthan,38,-22,-10,-8,0,-15,-8,35,8,18,4,0,0,8,2,42,-22,-13,-12,-13,-10,-3,R5 opacity (johad practitioners aging out),Phase 2,11 dark-zone fluoride districts; johad school candidate
+Gujarat,48,-15,-12,-15,-8,-10,-8,42,12,18,5,0,0,8,2,45,-20,-13,-13,-12,-7,-3,R5 + R6 coastal climate,Phase 2,Vapi+Ankleshwar industrial; CSPC decade+
+Uttar Pradesh,25,-25,-22,-15,0,-15,-9,32,5,18,3,0,0,8,2,15,-30,-15,-15,-13,-12,-7,R5 opacity · R3 JJM functionality,Phase 2,Yamuna BOD 50+ Delhi/Kanpur/Agra; Bundelkhand stack
+Bihar,18,-30,-25,-12,0,-12,-9,38,8,18,4,0,0,8,2,22,-28,-13,-13,-15,-12,-7,R5 opacity · R6 climate,Phase 3+,~50M arsenic-exposed in BR + adjacent states
+West Bengal,12,-30,-22,-12,-15,-15,-9,25,5,17,3,0,0,5,2,15,-30,-15,-15,-13,-12,-7,R5 opacity · R6 climate non-stationarity,Phase 2,Sundarbans -210 sq km; first wave climate refugees
+Delhi,22,-15,-30,-15,0,-12,-8,42,12,17,5,0,0,8,2,55,-15,-12,-12,-12,-8,-3,R3 JJM/utility · R5 opacity,Phase 3,Yamuna BOD 50+ vs limit 3; ward-scale unanswerable
+Ladakh,65,-5,-2,-3,0,-12,-8,32,8,15,4,0,0,8,2,45,-15,-22,-12,-12,-10,-3,R6 cryosphere,Phase 0,Indus basin upstream existential to downstream
+Sikkim,62,-5,-3,-5,0,-12,-8,35,10,17,3,0,0,8,2,48,-15,-22,-12,-12,-10,-3,R6 cryosphere,Phase 0,South Lhonak GLOF Oct 2023; Spring Atlas 50% seasonal
+Himachal Pradesh,60,-5,-5,-7,0,-12,-8,42,15,17,5,0,0,8,2,50,-15,-22,-13,-12,-10,-3,R6 cryosphere,Phase 0,Spiti+Lahaul ICIMOD priority sites
+Uttarakhand,58,-7,-7,-8,0,-12,-8,38,12,17,4,0,0,8,2,48,-15,-22,-12,-12,-10,-3,R6 cryosphere,Phase 0,Garhwal+Kumaon glacial cluster; 2013 Kedarnath
+Kerala,55,-12,-12,-13,-5,-10,-8,45,15,18,5,0,0,8,2,48,-22,-13,-12,-13,-9,-3,R6 climate non-stationarity,Phase 3,Backwaters salinity; 2018+19+24 compound flood-drought
+Odisha,52,-15,-12,-10,-5,-12,-8,45,15,20,5,0,0,8,2,42,-22,-22,-12,-12,-9,-3,R2 + R6,Phase 3+,Mahanadi tribunal active; Talcher coal-thermal
+Jharkhand,42,-22,-12,-15,0,-12,-8,48,18,20,5,0,0,8,2,38,-25,-13,-13,-13,-9,-3,R5 + R6 mining-water,Phase 3+,Sahibganj arsenic; PESA + FRA exist on paper
+Chhattisgarh,50,-15,-12,-15,0,-12,-8,52,18,20,6,0,0,8,2,42,-22,-13,-13,-12,-9,-3,R5 + thermal R6,Phase 3+,Korba coal-thermal water demand
+Assam,38,-25,-15,-12,0,-12,-8,40,12,18,4,0,0,8,2,35,-25,-13,-13,-13,-8,-3,R6 climate · R5 opacity,Phase 3+,Annual Brahmaputra floods; arsenic 24+ districts; Yarlung Tsangpo upstream
+Meghalaya,65,-5,-7,-8,0,-10,-8,55,20,20,7,0,0,8,2,42,-22,-13,-12,-13,-9,-3,R5 (positive precedent),Phase 1,Springshed Mission methodology mature; replicable
+Goa,55,-12,-15,-12,-3,-10,-8,58,22,20,7,0,0,7,2,45,-20,-13,-12,-13,-9,-3,R5 opacity,Phase 3+,Mandovi+Zuari estuary pollution; CRZ violations
