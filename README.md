@@ -6,7 +6,7 @@ A public-good infrastructure artefact for India's water situation, systems, and 
 
 ## Quick links
 
-- **Live dashboard** → [`dashboard.html`](dashboard.html) · or visit `https://waterdashboard.com/` once DNS is live
+- **Live dashboard** → [`dashboard.html`](dashboard.html) · or visit `https://waterdashboard.in/` once DNS is live
 - **Architecture constitution** → [`architecture.md`](architecture.md)
 - **Methodology** → [`methodology.html`](methodology.html)
 - **Audit methodology** → [`audit.md`](audit.md)
