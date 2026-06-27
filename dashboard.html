@@ -3810,12 +3810,16 @@ function renderBottlenecks(stateName){
 }
 renderBottlenecks();
 
-function renderCompare(){
+function renderExistsMissing(){
   var ex=document.getElementById('exists-list');var ms=document.getElementById('missing-list');
+  if(!ex||!ms)return; ex.innerHTML='';ms.innerHTML='';
   for(var i=0;i<EXISTS.length;i++){var e=EXISTS[i];ex.innerHTML+='<div class="compare-item exists"><div class="ci-dot"></div><div><b>'+e.name+'</b> · <span>'+e.desc+'</span></div></div>';}
   for(var j=0;j<MISSING.length;j++){var m=MISSING[j];ms.innerHTML+='<div class="compare-item missing"><div class="ci-dot"></div><div><b>'+m.name+'</b> · <span>'+m.desc+'</span></div></div>';}
 }
-renderCompare();
+renderExistsMissing();
+// v2.x fix · the side-by-side state comparator was defined later (overriding this fn name) and its
+// dropdowns were only filled inside clearGlobalSpotlight() — which never runs at load. Populate here.
+if(typeof populateCompareDropdowns==='function'){populateCompareDropdowns();renderCompare();}
 
 function renderCapture(stateName){
   var g=document.getElementById('capture-grid');g.innerHTML='';
