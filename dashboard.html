@@ -1713,6 +1713,11 @@ function applyGeo(lvl,key){
       var moreText=others.length?' · '+others.length+' more state'+(others.length>1?'s':'')+' in this basin ('+others.join(' + ')+')':'';
       narrEl.textContent='Page reads '+shed.label+' basin · using '+primary+' as primary state'+moreText+' · ↺ clear';
     }
+    // Ground the region-shed in its real CWC river basin(s) · Bharatlas / CWC-WRIS
+    if(typeof renderBasinGrounding==='function'){
+      var ppB=document.getElementById('place-panel');
+      if(ppB)ppB.insertAdjacentHTML('beforeend',renderBasinGrounding(shed));
+    }
   }else if(lvl==='city' && typeof CITY_DATA!=='undefined' && CITY_DATA[key]){
     // City filter: full cascade · city-aware re-render of every zone
     var city = CITY_DATA[key];
@@ -2093,6 +2098,47 @@ var CITY_DATA = {
   'Trivandrum':{state:'Kerala',body:'rivers',context:'Karamana river · Vellayani lake · climate-amplified monsoon · backwater stress',partners:'ATREE · Keystone · academic',fidelity:'low'}
 };
 
+// ============================================================
+// v2.x · Neer Vazhvu live-intelligence gateways (peer civic-data · neervazhvu.org)
+// Surfaced in the city profile so a static place-card becomes a door to LIVE ward-scale ground-truth.
+// ============================================================
+var NEER_VAZHVU_CITIES = {
+  'Chennai':{url:'https://neervazhvu.org/',tracks:'reservoir 30-day AutoARIMA forecast · 5-factor ward-risk · days-of-water-left · 1,635 water bodies across 200 wards'},
+  'Bengaluru':{url:'https://neervazhvu.org/',tracks:'Cauvery-pumping load · IISc 80-ward GW stress overlay · tanker market (OpenCity) · lake catchment atlas'},
+  'Madurai':{url:'https://neervazhvu.org/',tracks:'Vaigai allocation · 3-factor ward-risk · groundwater stations'}
+};
+
+// ============================================================
+// v2.x · CWC river-basin reference (Bharatlas · CWC-WRIS) — REAL hydrology behind the region-sheds
+// The Basin geo-mode reads a region-construct via its primary state; this grounds it in the
+// actual Central Water Commission river basin(s) it overlaps. Areas: CWC / India-WRIS (km² in India).
+// ============================================================
+var CWC_BASINS = {
+  'Indus':{area:'321,289 km²',type:'Himalayan · perennial',note:'Sutlej · Beas · Ravi · Indus · Treaty suspended Sep 2025'},
+  'Ganga':{area:'861,452 km²',type:'Himalayan · perennial',note:'India\'s largest basin · ~26% of land area · BOD critical in 60%+ stations'},
+  'Brahmaputra':{area:'194,413 km²',type:'Himalayan · perennial',note:'Highest discharge in India · annual floods · transboundary'},
+  'Barak & Meghna':{area:'41,723 km²',type:'Himalayan · perennial',note:'NE hill rivers · transboundary to Bangladesh'},
+  'Godavari':{area:'312,812 km²',type:'Peninsular · monsoon-fed',note:'Largest peninsular basin · Deccan dryland stress'},
+  'Krishna':{area:'258,948 km²',type:'Peninsular · monsoon-fed',note:'Inter-state allocation disputes · Deccan'},
+  'Cauvery':{area:'81,155 km²',type:'Peninsular · monsoon-fed',note:'TN-KA tribunal · Phase 0 anchor basin · Bengaluru + Chennai dependence'},
+  'Mahanadi':{area:'141,589 km²',type:'Peninsular · monsoon-fed',note:'Odisha-Chhattisgarh · delta + cyclone amplification'},
+  'Brahmani–Baitarani':{area:'51,822 km²',type:'Peninsular',note:'Odisha · mining-water compound'},
+  'Narmada':{area:'98,796 km²',type:'Peninsular · west-flowing',note:'Sardar Sarovar · displacement legacy'},
+  'Pennar':{area:'55,213 km²',type:'Peninsular · monsoon-fed',note:'Rayalaseema dryland'},
+  'WFR Kutch–Saurashtra–Luni':{area:'321,851 km²',type:'West-flowing + inland',note:'Includes Luni inland drainage · Thar–Aravalli arid'},
+  'WFR south of Tapi':{area:'~113,057 km²',type:'West-flowing · short steep',note:'Konkan · Goa · Kerala · Western-Ghats fed'},
+  'EFR Pennar–Kanyakumari':{area:'100,139 km²',type:'East-flowing',note:'TN–AP coast · Nilgiris fed'}
+};
+var SHED_TO_CWC = {
+  'punjab-haryana':['Indus','Ganga'], 'bundelkhand':['Ganga'], 'ladakh-cold':['Indus'],
+  'sundarbans':['Ganga','Brahmaputra'], 'gangetic':['Ganga'],
+  'urban-india':['Cauvery','Krishna','WFR south of Tapi'], 'deccan':['Godavari','Krishna'],
+  'thar-aravalli':['WFR Kutch–Saurashtra–Luni'], 'coast':['EFR Pennar–Kanyakumari','WFR south of Tapi'],
+  'eastern-himalayas':['Brahmaputra','Barak & Meghna'], 'western-ghats':['WFR south of Tapi','Krishna','Cauvery'],
+  'nilgiris':['Cauvery','EFR Pennar–Kanyakumari'], 'central-tribal':['Mahanadi','Brahmani–Baitarani','Godavari'],
+  'konkan-goa':['WFR south of Tapi']
+};
+
 
 
 // ============================================================
@@ -2356,8 +2402,33 @@ function renderCityProfile(cityName){
     html+='<div style="padding:6px 0;font-size:10px;color:var(--muted);font-style:italic">Sources: '+c.data_sources.join(' · ')+'</div>';
   }
   if(c.notes)html+='<div style="padding:6px 0;font-size:11px;color:var(--muted);font-style:italic">'+c.notes+'</div>';
+  if(typeof NEER_VAZHVU_CITIES!=='undefined' && NEER_VAZHVU_CITIES[cityName]){
+    var nv=NEER_VAZHVU_CITIES[cityName];
+    html+='<div style="margin-top:9px;padding:9px 11px;background:rgba(38,198,218,.08);border:1px solid #26C6DA;border-radius:6px">'
+      +'<div style="font:700 9px sans-serif;text-transform:uppercase;letter-spacing:.5px;color:#26C6DA;margin-bottom:4px">◉ Live ward-scale intelligence · peer civic-data</div>'
+      +'<div style="font-size:11px;color:var(--text);line-height:1.5">Neer Vazhvu tracks '+cityName+' live: '+nv.tracks+'.</div>'
+      +'<a href="'+nv.url+'" target="_blank" rel="noopener" style="display:inline-block;margin-top:5px;font-size:11px;font-weight:600;color:#26C6DA;text-decoration:none">Open live '+cityName+' water intelligence → neervazhvu.org</a>'
+      +'<div style="font-size:9px;color:var(--muted);margin-top:4px;font-style:italic">Open-source · the citizen "Bhujal app" this canvas argues for (gaps.md L4 · Access)</div></div>';
+  }
   html+='</div>';
   return html;
+}
+
+// v2.x · Basin grounding · render the REAL CWC river basin(s) a region-shed overlaps (Bharatlas · CWC-WRIS)
+function renderBasinGrounding(shed){
+  if(!shed || typeof SHED_TO_CWC==='undefined' || !SHED_TO_CWC[shed.key])return '';
+  var keys=SHED_TO_CWC[shed.key], rows='';
+  for(var i=0;i<keys.length;i++){
+    var b=(typeof CWC_BASINS!=='undefined')?CWC_BASINS[keys[i]]:null; if(!b)continue;
+    rows+='<div style="padding:5px 0;border-bottom:1px dashed var(--border);font-size:11px"><span style="color:var(--text);font-weight:600">'+keys[i]+'</span> <span style="color:var(--muted)">· '+b.area+' · '+b.type+'</span><div style="color:var(--muted);font-size:10px;margin-top:1px">'+b.note+'</div></div>';
+  }
+  if(!rows)return '';
+  var plural=keys.length>1;
+  return '<div style="margin-top:10px;padding:11px 14px;background:var(--bg3);border-left:3px solid #26C6DA;border-radius:6px">'
+    +'<div style="font:700 10px sans-serif;text-transform:uppercase;letter-spacing:.6px;color:#26C6DA;margin-bottom:5px">Real hydrological basin'+(plural?'s':'')+' · CWC</div>'
+    +'<div style="font-size:10px;color:var(--muted);margin-bottom:6px;font-style:italic">"'+shed.label+'" is a region-construct read via its primary state. The actual CWC river basin'+(plural?'s it overlaps:':' it sits in:')+'</div>'
+    +rows
+    +'<div style="font-size:10px;color:var(--muted);margin-top:6px">Basin geometry: <a href="https://bharatlas.com/" target="_blank" rel="noopener" style="color:var(--blue)">Bharatlas</a> · CWC-WRIS river-basin polygons · areas: CWC / India-WRIS</div></div>';
 }
 
 
