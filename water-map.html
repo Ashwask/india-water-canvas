@@ -531,7 +531,7 @@ function bindStateLayer(feature, layer) {
 }
 
 function loadStates() {
-  fetch('../india_states_simple.geojson').then(function(r){
+  fetch('india_states_simple.geojson').then(function(r){
     return r.json();
   }).then(function(geo){
     statesLayer = L.geoJSON(geo, {
@@ -543,7 +543,7 @@ function loadStates() {
     }).addTo(map);
   }).catch(function(err){
     console.error('GeoJSON load failed:', err);
-    document.getElementById('empty').innerHTML += '<p style="color:#a83030;margin-top:14px"><b>Map data unavailable.</b> Could not load <code>../india_states_simple.geojson</code>. The map will work when served alongside the parent dashboard.</p>';
+    document.getElementById('empty').innerHTML += '<p style="color:#a83030;margin-top:14px"><b>Map data unavailable.</b> Could not load <code>india_states_simple.geojson</code> from the repo root.</p>';
   });
 }
 
