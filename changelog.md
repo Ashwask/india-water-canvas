@@ -6,6 +6,25 @@ The current version is reflected in the dashboard footer + `CITATION.cff`.
 
 ---
 
+## v2.1 · 2026-10-07
+
+**Data refresh to latest authoritative releases + ship the map-fix / strengthening work.**
+
+Figures refreshed:
+- **JJM coverage:** "81%+" rolled to "~82%" rural HH tap coverage (82.09% / ~15.8 cr HH, 2026). JJM 2.0 outlay (₹8.69 L cr through Dec 2028) unchanged. Functional-rate gap re-stated (CAG 40-55%).
+- **CGWB:** "GEC 2023" references repointed to "Dynamic Ground Water Resources of India 2024" (released Jan 2025). National over-exploited units corrected to 751 of 6,746 (11.13%); national stage of extraction 60.5%. Replaces the earlier "17% blocks / +5,777 critical" KPI.
+- **CPCB:** polluted river stretches updated 311 to 296 (across 271 rivers, 2025 report), down from 351 in 2018; 37 Priority-I stretches surfaced.
+- **16th Finance Commission:** reframed from a future "Mar 2026 bet-the-farm signal" to tabled fact (submitted 17 Nov 2025, tabled in Parliament 1 Feb 2026). Records that it ties 50% of local-body basic grants to water+sanitation+SWM (~₹1.74 L cr rural over 2026-31), so the O&M-financing signal landed partly positive; absorption into salaries flagged as the open risk.
+- Header source-line + baseline captions restamped; `data refreshed Oct 2026` marker added.
+
+Regression fixes shipped in the same release (previously un-merged on the strengthen branch):
+- Restored the choropleth map broken by the standalone-repo split (vendored `india_geo.js` + `india_states_simple.geojson`, repointed paths off the now-absent parent repo).
+- Fixed the empty Compare-Places picker + the `renderCompare` name collision (renamed to `renderExistsMissing()`).
+- Repointed 22 dead "contribute" links from `RFPartnerMap` to `india-water-canvas`.
+- Added Neer Vazhvu (ward-scale city gateways + a ward-legibility audit lane) and Bharatlas (CWC river-basin grounding in Basin mode).
+
+Sources: ejalshakti JJM dashboard · CGWB Dynamic Ground Water Resources 2024 · CPCB polluted-river-stretches 2025 · PRS/16th Finance Commission report for 2026-31.
+
 ## v2.0 — 2026-05-11
 
 **Major rewrite · LEMMA architecture (Legibility · Engagement · Measurement · Movement · Audit).**
