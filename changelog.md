@@ -6,6 +6,20 @@ The current version is reflected in the dashboard footer + `CITATION.cff`.
 
 ---
 
+## v2.2 · 2026-10-07
+
+**Scheme outlays refreshed to actual FY2026-27 Union Budget allocations** (sourced via the open `urbanmorph/schemes` register, reconciled to Expenditure Budget Statement 4A/4B).
+
+The dashboard's GOVERNMENT SCHEMES funder tier previously showed mission-outlay averages that run well above actual current-year central budgets. Replaced with verified central BE FY2026-27:
+- **JJM: ₹67,670 cr** (second-largest centrally sponsored scheme after MGNREGA; ~4x the FY25-26 revised estimate). Mission total ₹8.69 L cr through Dec 2028 retained as context.
+- **AMRUT ₹8,000 cr** (was "~₹55-60k cr/yr"), **PMKSY ~₹9,100 cr** (was "~₹18-20k cr/yr"), **Namami Gange / National Ganga Plan ₹3,100 cr**, **MGNREGA ₹30,000 cr** programme BE.
+- **Atal Bhujal ₹1,780 cr** (was "~₹1,200 cr/yr"). NOTE: the schemes register's machine-parse showed ₹0.13 cr for Atal Bhujal (a residual central-sector token line); cross-checked against PRS Demand-for-Grants and used the correct ₹1,780 cr. Register flagged for that parse.
+- Intro anchor adds Ministry of Jal Shakti FY2026-27 allocation (₹94,808 cr).
+- Data-interoperability intervention now notes the Centre already funds a Water Resources Information System (₹228 cr) + Ground Water Management & Regulation (₹425 cr), neither shipped as an open federated API.
+- Added SOURCES entries: Union Budget 2026-27 Stmt 4A/4B + the `urbanmorph/schemes` register (india-schemes.pages.dev). Header source-line updated.
+
+Verification: JJM ₹67,670 cr + Atal Bhujal ₹1,780 cr + Jal Shakti ₹94,808 cr cross-checked against PRS Demand for Grants 2026-27 (Jal Shakti).
+
 ## v2.1.1 · 2026-10-07
 
 **CGWB rolled 2024 to 2025 (latest release).** The Dynamic Ground Water Resource Assessment 2025 superseded the 2024 edition used hours earlier. National over-exploited units updated to 730 of 6,762 (10.8%), national stage of extraction 60.6%, recharge 448.52 BCM. Surfaced the long-run trend: over-exploited units have fallen from 17.2% (2017) to 10.8% (2025) — which is also the provenance of the dashboard's original "17%" KPI (it was the 2017 baseline). All "CGWB 2024" / "Dynamic GW Resources 2024" citations repointed to 2025.

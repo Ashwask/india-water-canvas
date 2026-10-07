@@ -358,7 +358,7 @@ details:not([open]) .src-list{display:none}
   <select id="sel-geo" onchange="onGeoChange()" style="display:none"><option value="">Select…</option></select>
   <span class="geo-badge" id="geo-badge">🇮🇳 National View</span>
   <button class="reset-btn" onclick="resetGeo()">↺ Reset</button>
-  <span style="margin-left:auto;font-size:10px;color:var(--muted)">CGWB 2025 · CWC · CPCB 2025 · IMD · ICIMOD · JJM dashboard 2026 · CAG audits 2022, 2024 · 16th FC (tabled Feb 2026) · MCA CSR FY25 · OpenStreetMap · data refreshed Oct 2026</span>
+  <span style="margin-left:auto;font-size:10px;color:var(--muted)">CGWB 2025 · CWC · CPCB 2025 · IMD · ICIMOD · JJM dashboard 2026 · CAG audits 2022, 2024 · 16th FC (tabled Feb 2026) · Union Budget FY2026-27 · MCA CSR FY25 · OpenStreetMap · data refreshed Oct 2026</span>
 </div>
 
 <!-- Single next-step pill · architecture: one suggestion not seven · context-aware -->
@@ -429,7 +429,7 @@ details:not([open]) .src-list{display:none}
       <div class="live-badge"><span class="live-dot"></span> Investment Thesis Dashboard</div>
       <h1 class="main-title">India Water System — <span>Water Canvas</span></h1>
       <p class="subtitle">National Ecosystem Intelligence · Systems Mapping · Unit Economics · Pan-India Actor Landscape</p>
-      <p style="font-size:13px;color:var(--muted);margin-top:14px;max-width:680px;line-height:1.7">India holds <strong style="color:var(--text)">4% of global freshwater for 18% of global population</strong>, runs on <strong style="color:var(--text)">~25% of all groundwater extracted globally</strong>, and is poised to cross water scarcity (≤1,000 m³/capita/yr) by 2030 on current trajectory. The state spends <strong style="color:var(--text)">₹2.5–3.5 L cr/yr</strong> across schemes; <strong style="color:var(--text)">~₹3,000–5,000 cr/yr</strong> of that disbursement does not produce its claimed outcome. This canvas maps the system: water signals, infrastructure gaps, unit economics, the funder ecosystem, and the institutional vehicle that does not yet exist. Anchored to JJM 2.0 ₹8.69 L cr (Mar 2026), CGWB Dynamic GW Resources 2025, ICIMOD, CAG 2022 + 2024, 16th Finance Commission (tabled Feb 2026), MCA CSR FY25.</p>
+      <p style="font-size:13px;color:var(--muted);margin-top:14px;max-width:680px;line-height:1.7">India holds <strong style="color:var(--text)">4% of global freshwater for 18% of global population</strong>, runs on <strong style="color:var(--text)">~25% of all groundwater extracted globally</strong>, and is poised to cross water scarcity (≤1,000 m³/capita/yr) by 2030 on current trajectory. The state spends <strong style="color:var(--text)">₹2.5–3.5 L cr/yr</strong> across schemes (the Ministry of Jal Shakti alone was allocated <strong style="color:var(--text)">₹94,808 cr in FY2026-27</strong>, with JJM at ₹67,670 cr the second-largest centrally sponsored scheme after MGNREGA); <strong style="color:var(--text)">~₹3,000–5,000 cr/yr</strong> of that disbursement does not produce its claimed outcome. This canvas maps the system: water signals, infrastructure gaps, unit economics, the funder ecosystem, and the institutional vehicle that does not yet exist. Anchored to JJM 2.0 ₹8.69 L cr (Mar 2026), CGWB Dynamic GW Resources 2025, ICIMOD, CAG 2022 + 2024, 16th Finance Commission (tabled Feb 2026), MCA CSR FY25.</p>
       <p style="font-size:11px;color:var(--muted);margin-top:10px">Open data · CC BY-NC 4.0 · Leaflet · D3 · Chart.js · OpenStreetMap · prose-first internal strategy</p>
     </div>
     <div style="text-align:right">
@@ -1325,13 +1325,13 @@ var SHEDS = [
 
 // FUNDERS — annual ₹ cr disbursement
 var FUNDERS = [
-  {tier:'GOVERNMENT SCHEMES (~₹2.5–3 L cr/yr)', items:[
-    ['JJM 2.0','~₹1.45 L cr/yr · ₹8.69 L cr through Dec 2028','aquifers'],
-    ['MGNREGA water-NRM','~₹50,000 cr/yr · 60% rule on ₹86k cr','aquifers'],
-    ['AMRUT 2.0','~₹55,000–60,000 cr/yr · urban water','urban-drains'],
-    ['PMKSY','~₹18,000–20,000 cr/yr · AIBP+HKKP+PDMC+WDC','aquifers'],
-    ['Namami Gange Phase II','~₹4,500–5,500 cr/yr','rivers'],
-    ['Atal Bhujal Yojana','~₹1,200 cr/yr · WB co-financed','aquifers']
+  {tier:'GOVERNMENT SCHEMES · central BE FY2026-27 (Union Budget Stmt 4A/4B)', items:[
+    ['JJM 2.0','₹67,670 cr central BE FY27 (2nd-largest CSS after MGNREGA) · ₹8.69 L cr mission total through Dec 2028','aquifers'],
+    ['MGNREGA water-NRM','₹30,000 cr programme BE FY27 (demand-driven, usually supplemented) · ~60% works water-NRM','aquifers'],
+    ['AMRUT 2.0','₹8,000 cr central BE FY27 · urban water+sewerage · ₹2.99 L cr mission total','urban-drains'],
+    ['PMKSY','~₹9,100 cr central BE FY27 (Krishi Sinchai ₹6,587 cr + Watershed ₹2,500 cr)','aquifers'],
+    ['Namami Gange / National Ganga Plan','₹3,100 cr central BE FY27','rivers'],
+    ['Atal Bhujal Yojana','₹1,780 cr BE FY27 · WB co-financed','aquifers']
   ]},
   {tier:'MULTILATERAL / DFI (~₹15–25K cr/yr)', items:[
     ['World Bank India water','~₹4,000 cr/yr · IBRD active portfolio','aquifers'],
@@ -1452,7 +1452,7 @@ var CAPTURE = [
 
 var ACTIONS = [
   {n:'01', icon:'⌬', name:'Groundwater commons monitoring', desc:'10K community piezometers + Bhujal Jankar institutional muscle scaled 10×, holding the abstraction visibility that closes the most consequential dark-data gap.', tag:'L1 + L3', cost:'₹200–300 cr · 7–10 yrs'},
-  {n:'02', icon:'☷', name:'Water data interoperability layer', desc:'Federated open API across IMD + CWC + CGWB + CPCB + state PCBs + ISRO. India Stack pattern, water vertical. Multiplier on every other layer.', tag:'L2', cost:'₹50–100 cr · 3–5 yrs'},
+  {n:'02', icon:'☷', name:'Water data interoperability layer', desc:'Federated open API across IMD + CWC + CGWB + CPCB + state PCBs + ISRO. India Stack pattern, water vertical. Multiplier on every other layer. Note: the Centre already funds a Water Resources Information System (₹228 cr BE FY27) + Ground Water Management & Regulation (₹425 cr), but neither ships as an open federated API.', tag:'L2', cost:'₹50–100 cr · 3–5 yrs'},
   {n:'03', icon:'⛰', name:'Urban wetland legal+financing', desc:'Statutory protection plus wetland-bond architecture (debt instruments backed by city water-savings from restored wetlands). Targeted at the 50 cities losing wetlands fastest.', tag:'L6', cost:'₹50–80 cr · 5–7 yrs'},
   {n:'04', icon:'⚒', name:'Water-builder apprenticeship', desc:'500 apprenticeship centres + 200 master trainers + 100K certified water builders by 2033. The labour-side of the JJM 2.0 O&M cliff.', tag:'L1 + L6', cost:'₹80–120 cr · 7–10 yrs'},
   {n:'05', icon:'☉', name:'Citizen sensor network', desc:'10K community quality kits + offline mobile + government-data-ingestion. Enables 48-hour detection cycles on contamination versus 6-month government cycle.', tag:'L1 + L3', cost:'₹40–60 cr · 3–5 yrs'},
@@ -1519,7 +1519,8 @@ var SOURCES = [
     {org:'CPCB',title:'Polluted river stretches list',url:'https://cpcb.nic.in/',note:'296 stretches across 271 rivers (2025) · 37 Priority-I',type:'report'},
     {org:'IMD',title:'Daily gridded rainfall + AWS',url:'https://mausam.imd.gov.in/',note:'25 km grid since 1901',type:'dataset'},
     {org:'NRSC/ISRO',title:'Bhuvan portal',url:'https://bhuvan.nrsc.gov.in/',note:'Water bodies (NDWI) + drought indicators + wetland atlas 2011',type:'portal'},
-    {org:'NMCG',title:'Namami Gange dashboard',url:'https://nmcg.nic.in/',note:'Ganga + tributary monitoring',type:'dashboard'}
+    {org:'NMCG',title:'Namami Gange dashboard',url:'https://nmcg.nic.in/',note:'Ganga + tributary monitoring',type:'dashboard'},
+    {org:'Union Budget',title:'Expenditure Budget 2026-27 · Statement 4A/4B (scheme allocations)',url:'https://www.indiabudget.gov.in/',note:'Central BE FY27: JJM ₹67,670 cr (2nd-largest CSS) · AMRUT ₹8,000 cr · National Ganga Plan ₹3,100 cr · PMKSY ~₹9,100 cr · Atal Bhujal ₹1,780 cr · WRIS ₹228 cr · GW Mgmt ₹425 cr',type:'dataset'}
   ]},
   {group:'AUDIT + OVERSIGHT', items:[
     {org:'CAG',title:'JJM Performance Audit (2024)',url:'#',note:'Definition slippage on functional household tap connection',type:'audit'},
@@ -1540,7 +1541,8 @@ var SOURCES = [
     {org:'Veditum',title:'Moving Upstream + Sand Watch',url:'https://veditum.org/',note:'River archive + sand-mining records',type:'archive'},
     {org:'CSE',title:'State of India\'s Environment',url:'https://www.cseindia.org/',note:'Annual + investigative water reportage',type:'report'},
     {org:'Neer Vazhvu',title:'Urban water intelligence · Chennai · Madurai · Bengaluru',url:'https://neervazhvu.org/',note:'Open-source (MIT) · reservoir AutoARIMA forecasts + CGWB GW scoring + 5-factor ward-risk + JRC/Dynamic-World tank-loss + Claude briefings · EN/Tamil/Kannada · the citizen "Bhujal app" analogue this artefact argues for (gaps.md L4)',type:'civic-data'},
-    {org:'Bharatlas',title:'India\'s open atlas · view · verify · contribute',url:'https://bharatlas.com/',note:'LGD CD-blocks (7,146 polygons) + wetlands + CWC-WRIS river-basin polygons · open geospatial · contribute model mirrors LEMMA Audit/Engagement',type:'civic-data'}
+    {org:'Bharatlas',title:'India\'s open atlas · view · verify · contribute',url:'https://bharatlas.com/',note:'LGD CD-blocks (7,146 polygons) + wetlands + CWC-WRIS river-basin polygons · open geospatial · contribute model mirrors LEMMA Audit/Engagement',type:'civic-data'},
+    {org:'schemes register',title:'Indian government schemes · four official sources + 16 state budgets',url:'https://india-schemes.pages.dev/',note:'Machine-built monthly register (11,079 schemes) reconciled to Union Budget Stmt 4A/4B · source of the central BE FY27 water-scheme allocations above · open (urbanmorph/schemes)',type:'civic-data'}
   ]}
 ];
 
@@ -2256,10 +2258,10 @@ var AUDIT_CLAIMS = [
   {lane:'ocems',claim_id:'ocems-public-access',place:'India',body:'rivers',claim_source:'CPCB OCEMS data policy',claim_value:'Industry data legally restricted from public access',verification_source:'RTI denials + legal challenges',verification_value:'Public-good information legally locked',discrepancy:'Civic-side audit impossible without legal reform',status:'verified',last_updated:'2026-05-10'},
 
   // Lane 4: Scheme spend vs outcome
-  {lane:'scheme-spend',claim_id:'jjm-spend-outcome',place:'India',body:'aquifers',claim_source:'JJM 2.0 outlay (₹1.45 L cr/yr · ₹8.69 L cr through Dec 2028)',claim_value:'₹1.45 L cr/yr → ~82% coverage claim',verification_source:'H/A/I trajectory + CAG functional rate',verification_value:'Health-axis still declining · functional 40-55%',discrepancy:'₹/H-point near-zero or negative',status:'verified',last_updated:'2026-10-07'},
+  {lane:'scheme-spend',claim_id:'jjm-spend-outcome',place:'India',body:'aquifers',claim_source:'JJM 2.0 outlay (central BE ₹67,670 cr FY27 · ₹8.69 L cr mission total through Dec 2028)',claim_value:'₹67,670 cr FY27 central BE → ~82% coverage claim',verification_source:'H/A/I trajectory + CAG functional rate',verification_value:'Health-axis still declining · functional 40-55%',discrepancy:'₹/H-point near-zero or negative',status:'verified',last_updated:'2026-10-07'},
   {lane:'scheme-spend',claim_id:'namami-gange-outcome',place:'India',body:'rivers',claim_source:'Namami Gange ₹38K cr cumulative spend',claim_value:'Ganga BOD targeted improvement',verification_source:'CPCB river-quality data 2015-2024',verification_value:'BOD reductions marginal · Kanpur+Varanasi critical',discrepancy:'Outcome lag vs capital deployed',status:'verified',last_updated:'2026-05-10'},
   {lane:'scheme-spend',claim_id:'mgnrega-water-durability',place:'India',body:'lakes-tanks',claim_source:'MGNREGA water-NRM ~₹50K cr/yr',claim_value:'Tank desilting + farm pond creation',verification_source:'CAG audit + post-implementation checks',verification_value:'Durability variable · 30-60% non-functional in 3 yrs',discrepancy:'Asset creation vs durability gap',status:'verified',last_updated:'2026-05-10'},
-  {lane:'scheme-spend',claim_id:'atal-bhujal-outcome',place:'India',body:'aquifers',claim_source:'Atal Bhujal ₹1,200 cr/yr · WB co-financed',claim_value:'GW recharge in stressed blocks',verification_source:'CGWB Dynamic GW Resources 2025',verification_value:'Block-level recharge directional improvement',discrepancy:'Methodology lag · 12-18 mo data delay',status:'in-review',last_updated:'2026-10-07'},
+  {lane:'scheme-spend',claim_id:'atal-bhujal-outcome',place:'India',body:'aquifers',claim_source:'Atal Bhujal ₹1,780 cr BE FY27 · WB co-financed',claim_value:'GW recharge in stressed blocks',verification_source:'CGWB Dynamic GW Resources 2025',verification_value:'Block-level recharge directional improvement',discrepancy:'Methodology lag · 12-18 mo data delay',status:'in-review',last_updated:'2026-10-07'},
   {lane:'scheme-spend',claim_id:'amrut-urban-dayzero',place:'India',body:'urban-drains',claim_source:'AMRUT 2.0 ₹55-60K cr/yr',claim_value:'Urban water supply improvement',verification_source:'BLR · Chennai · Hyderabad utility data',verification_value:'Day-Zero events rising · Chennai 2019 · BLR Mar 2024 near-miss',discrepancy:'Capital does not address demand-side',status:'verified',last_updated:'2026-05-10'},
 
   // Lane 5: Anchor commitments tracker
