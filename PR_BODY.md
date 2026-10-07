@@ -1,6 +1,15 @@
 ## Summary
 
-Strengthens the India Water Canvas dashboard using two peer civic-data projects — **Neer Vazhvu** and **Bharatlas** — and fixes regressions introduced by the v2.0 standalone-repo split.
+Refreshes the India Water Canvas dashboard to the latest authoritative figures (Oct 2026), strengthens it using two peer civic-data projects — **Neer Vazhvu** and **Bharatlas** — and fixes regressions introduced by the v2.0 standalone-repo split (including the live map, which was fully broken).
+
+## Data refresh (Oct 2026)
+
+- **JJM coverage:** "81%+" → "~82%" rural HH tap coverage (82.09% / ~15.8 cr HH, 2026). Outlay (₹8.69 L cr through Dec 2028) unchanged; functional-rate gap re-stated (CAG 40–55%).
+- **CGWB:** "GEC 2023" → "Dynamic Ground Water Resources of India 2024" (released Jan 2025). National over-exploited units corrected to **751 of 6,746 (11.13%)**, national extraction stage **60.5%** — replaces the earlier "17% blocks / +5,777 critical" KPI.
+- **CPCB:** polluted river stretches **311 → 296** (271 rivers, 2025 report; down from 351 in 2018); 37 Priority-I surfaced.
+- **16th Finance Commission:** reframed from a future "Mar 2026 bet-the-farm signal" to tabled fact (submitted 17 Nov 2025, tabled 1 Feb 2026). Now records that it ties 50% of local-body basic grants to water+sanitation+SWM (~₹1.74 L cr rural, 2026–31), so the O&M-financing signal landed partly positive; absorption into salaries flagged as the open risk.
+- Header source-line + baseline captions restamped; `data refreshed Oct 2026` marker added; AUDIT_CLAIMS + data-freshness ledger dates bumped.
+- Sources: ejalshakti JJM dashboard · CGWB Dynamic GW Resources 2024 · CPCB polluted-river-stretches 2025 · PRS / 16th FC report for 2026-31.
 
 ## Neer Vazhvu (neervazhvu.org)
 
