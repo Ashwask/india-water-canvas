@@ -1,5 +1,5 @@
 field,last_updated,next_due,cadence,owner,source,fidelity,notes
-per-state-H,2026-05-10,2026-11-10,semi-annual,data-steward,CGWB 2024 + CPCB 2025,high,National headlines aligned to CGWB Dynamic GW Resources 2024 + CPCB 2025 (Oct 2026); per-state H scores unchanged this cycle
+per-state-H,2026-05-10,2026-11-10,semi-annual,data-steward,CGWB 2025 + CPCB 2025,high,National headlines aligned to CGWB Dynamic GW Resources 2025 + CPCB 2025 (Oct 2026); per-state H scores unchanged this cycle
 per-state-A,2026-05-10,2026-11-10,semi-annual,data-steward,CGWB GEC + CWC + CAG,high,GW stage + per-cap m³ + JJM functional rate
 per-state-I,2026-05-10,2026-11-10,semi-annual,data-steward,IMD + NFHS + IFLR,medium,Population exposure + climate vulnerability composites
 funder-ladder,2026-05-10,2026-08-10,quarterly,data-steward,MCA CSR + sustainability reports,medium,FY-end CSR refresh

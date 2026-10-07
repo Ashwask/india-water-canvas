@@ -6,6 +6,10 @@ The current version is reflected in the dashboard footer + `CITATION.cff`.
 
 ---
 
+## v2.1.1 · 2026-10-07
+
+**CGWB rolled 2024 to 2025 (latest release).** The Dynamic Ground Water Resource Assessment 2025 superseded the 2024 edition used hours earlier. National over-exploited units updated to 730 of 6,762 (10.8%), national stage of extraction 60.6%, recharge 448.52 BCM. Surfaced the long-run trend: over-exploited units have fallen from 17.2% (2017) to 10.8% (2025) — which is also the provenance of the dashboard's original "17%" KPI (it was the 2017 baseline). All "CGWB 2024" / "Dynamic GW Resources 2024" citations repointed to 2025.
+
 ## v2.1 · 2026-10-07
 
 **Data refresh to latest authoritative releases + ship the map-fix / strengthening work.**
