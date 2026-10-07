@@ -6,6 +6,10 @@ The current version is reflected in the dashboard footer + `CITATION.cff`.
 
 ---
 
+## v2.2.1 · 2026-10-07
+
+**Map boundaries upgraded to official LGD lineage (via Bharatlas / urbanmorph/geodata).** The choropleth previously used state polygons dissolved from a community district file (udit-001) via mapshaper. Replaced with the Local Government Directory (LGD) state set from the Bharatlas open catalog (bharatlas.com), the same source already cited in the dashboard. Rebuilt `india_geo.js` (inline `INDIA_GEOJSON`) + `india_states_simple.geojson` from `LGD_States.geojson`, simplified visvalingam 0.4% + precision 0.01 via mapshaper (~65 KB each, all 36 states/UTs). Property `st_nm` mapped to the dashboard's exact names so it is a drop-in (no STATE_ALIAS changes). Verified live via headless Chrome: full choropleth renders, every state colours by status.
+
 ## v2.2 · 2026-10-07
 
 **Scheme outlays refreshed to actual FY2026-27 Union Budget allocations** (sourced via the open `urbanmorph/schemes` register, reconciled to Expenditure Budget Statement 4A/4B).
