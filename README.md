@@ -2,16 +2,18 @@
 
 A public-good infrastructure artefact for India's water situation, systems, and place-based interventions. CC BY-NC 4.0 · open data · open methodology.
 
-**v2.0 LEMMA architecture** · place-based · climate-aware · audit-honest.
+**v2.2 · LEMMA architecture** · place-based · climate-aware · audit-honest. **Data refreshed October 2026.**
 
 ## Quick links
 
-- **Live dashboard** → [`dashboard.html`](dashboard.html) · or visit `https://waterdashboard.in/` once DNS is live
+- **Live dashboard** → **[waterdashboard.in/dashboard.html](https://waterdashboard.in/dashboard.html)** (live) · source: [`dashboard.html`](dashboard.html)
+- **Interactive map** → [`water-map.html`](water-map.html) · [waterdashboard.in/water-map.html](https://waterdashboard.in/water-map.html)
 - **Architecture constitution** → [`architecture.md`](architecture.md)
 - **Methodology** → [`methodology.html`](methodology.html)
 - **Audit methodology** → [`audit.md`](audit.md)
 - **Maintenance + curation contract** → [`maintenance.md`](maintenance.md)
-- **Open data** → [`data/`](data/) · 11 CSVs · CC BY-NC 4.0
+- **Open data** → [`data/`](data/) · 13 CSVs · CC BY-NC 4.0
+- **Changelog** → [`changelog.md`](changelog.md) · latest: v2.2 (Oct 2026 data refresh)
 - **Prose folder** → 14 chapters · `landscape.md` → `build-plan.md`
 
 ## v2.0 LEMMA · the five primitives
@@ -28,13 +30,23 @@ Open `dashboard.html`. Default view = India. Pick a state · city · or basin fr
 2. **ENGAGEMENT** · who's working on it (partners · funders · market vendors + failed canon)
 3. **MOVEMENT** · what's moving year over year (7 axes · directional fidelity markers)
 4. **ADAPT** · climate strategies (adaptation + mitigation · place-relevant highlights)
-5. **AUDIT** · where claims don't match reality (6 cross-reference lanes · 27 seeded claims)
+5. **AUDIT** · where claims don't match reality (7 cross-reference lanes · 30 seeded claims)
 
 Plus the action drawer (8 pre-filled contribution paths · including anonymous).
 
 ## Status
 
-**v2.0 draft · invitation for review · canon is open.** Hard launch held pending reader-test feedback + legal scaffolding on the audit lanes.
+**v2.2 · live at [waterdashboard.in](https://waterdashboard.in/) · canon is open.** Still an invitation for review; audit-lane legal scaffolding ongoing.
+
+### Latest data refresh · October 2026
+
+National headline figures rolled to the latest authoritative releases (full detail in [`changelog.md`](changelog.md)):
+
+- **Groundwater** · CGWB *Dynamic Ground Water Resources of India 2025*: 730 of 6,762 assessment units over-exploited (10.8%, down from 17.2% in 2017), national stage of extraction 60.6%, recharge 448.52 BCM.
+- **JJM** · ~82% rural household tap coverage (2026); central Union Budget allocation **₹67,670 cr in FY2026-27** (second-largest centrally sponsored scheme after MGNREGA); CAG functional rate 40 to 55%.
+- **Rivers** · CPCB 2025: 296 polluted river stretches across 271 rivers (down from 351 in 2018), 37 Priority-I.
+- **Finance** · 16th Finance Commission tabled 1 Feb 2026, ties ~₹1.74 L cr of rural local-body grants to water + sanitation over 2026 to 2031.
+- **Scheme outlays** · refreshed to actual FY2026-27 Union Budget allocations (Stmt 4A/4B), sourced via the open [`urbanmorph/schemes`](https://india-schemes.pages.dev/) register.
 
 Reader-test outreach: see [`outreach-templates.md`](outreach-templates.md).
 
