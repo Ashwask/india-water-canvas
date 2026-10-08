@@ -6,6 +6,16 @@ The current version is reflected in the dashboard footer + `CITATION.cff`.
 
 ---
 
+## v2.3 · 2026-10-09
+
+**Readability pass: cut the cognitive overload.** The single-scroll page had stacked walls of prose on top of the data. Reduced the written content and introduced progressive disclosure so the default view is calm and detail is one click away.
+
+- **Top trimmed hard:** removed duplicate titles, persona-era copy (personas were retired at v2.0), the stale "v1.0 / 2026-05-11" tags and the redundant tech-stack line; the intro paragraph went from ~8 lines to 3; hero sub is now one line.
+- **Heavy text sections collapsed** behind native `<details>` toggles (nothing deleted, one click to open): *Six things that don't add up*, *How we measure progress* (gates + 12 hard questions + capture tracker + uncertainty), *What the numbers hide*, *Where water meets the rest* (intersections), and the *Who sells solutions* market grid.
+- **Verbose intros trimmed** across Place, Movement, Trends, Adapt and Audit; redundant section-vs-zone duplication removed.
+- Data and visualisation sections (map, trend charts, Sankey, partner/funder tables, audit lanes, capex reconciliation) stay visible; only prose was cut or collapsed.
+- New reusable `.collapse` component (native details, file:// safe). Verified via headless Chrome: page is markedly shorter, all toggles render, map + charts intact.
+
 ## v2.2.1 · 2026-10-07
 
 **Map boundaries upgraded to official LGD lineage (via Bharatlas / urbanmorph/geodata).** The choropleth previously used state polygons dissolved from a community district file (udit-001) via mapshaper. Replaced with the Local Government Directory (LGD) state set from the Bharatlas open catalog (bharatlas.com), the same source already cited in the dashboard. Rebuilt `india_geo.js` (inline `INDIA_GEOJSON`) + `india_states_simple.geojson` from `LGD_States.geojson`, simplified visvalingam 0.4% + precision 0.01 via mapshaper (~65 KB each, all 36 states/UTs). Property `st_nm` mapped to the dashboard's exact names so it is a drop-in (no STATE_ALIAS changes). Verified live via headless Chrome: full choropleth renders, every state colours by status.

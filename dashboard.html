@@ -252,6 +252,16 @@ details:not([open]) .src-list{display:none}
 .q-test{display:block;margin-top:8px;color:var(--text);font-size:12px;font-style:italic;border-left:3px solid var(--teal);padding-left:10px}
 .q-test::before{content:'What would change my mind: ';font-weight:700;color:var(--teal);font-style:normal}
 
+/* Progressive-disclosure collapsible block (native details) */
+details.collapse{background:var(--bg2);border:1px solid var(--border);border-radius:8px;margin:12px 0;overflow:hidden}
+details.collapse>summary{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px;cursor:pointer;list-style:none;user-select:none;font-size:13px;font-weight:600;color:var(--text)}
+details.collapse>summary::-webkit-details-marker{display:none}
+details.collapse>summary .ct{font-size:11px;color:var(--muted);font-weight:400}
+details.collapse>summary::after{content:'▾ show';font-size:11px;color:var(--teal);font-weight:600;white-space:nowrap}
+details.collapse[open]>summary::after{content:'▴ hide'}
+details.collapse>summary:hover{background:var(--bg3)}
+.collapse-body{padding:4px 16px 14px;border-top:1px solid var(--border)}
+
 /* Insights grid */
 .insights-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin:14px 0}
 .insight{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:18px 20px;border-top:3px solid var(--teal);transition:transform .2s}
@@ -374,10 +384,10 @@ details:not([open]) .src-list{display:none}
 <!-- ============ HERO · first-principles · one question, one number, one next step ============ -->
 <section id="thesis-lead" style="background:linear-gradient(135deg,#0D1117 0%,#0d1f2e 60%,#0D1117 100%);padding:48px 24px 36px;border-bottom:1px solid var(--border)">
   <div style="max-width:1080px;margin:0 auto">
-    <div style="font:700 11px sans-serif;text-transform:uppercase;letter-spacing:.8px;color:var(--teal);margin-bottom:14px">India Water Canvas · v1.0 · public digital good</div>
+    <div style="font:700 11px sans-serif;text-transform:uppercase;letter-spacing:.8px;color:var(--teal);margin-bottom:14px">India Water Canvas · public digital good</div>
 
-    <h1 id="hero-question" style="font:700 clamp(26px,4vw,40px)/1.2 Georgia,serif;color:var(--text);margin:0 0 14px;letter-spacing:-.01em">Where in India is water in trouble — and what does it cost to fix?</h1>
-    <p id="hero-sub" style="font-size:15px;color:var(--muted);margin:0 0 28px;line-height:1.6;max-width:780px">Same numbers. Different doors in. Pick the role that fits — the question, the framing, and the next step adapt to you.</p>
+    <h1 id="hero-question" style="font:700 clamp(26px,4vw,40px)/1.2 Georgia,serif;color:var(--text);margin:0 0 14px;letter-spacing:-.01em">Where in India is water in trouble, and what does it cost to fix?</h1>
+    <p id="hero-sub" style="font-size:15px;color:var(--muted);margin:0 0 28px;line-height:1.6;max-width:780px">Pick a place to see what's true there. Scroll for the system behind it.</p>
 
     <!-- KPI strip · the 4 anchor numbers, persona-framed -->
     <div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;overflow:hidden">
@@ -418,7 +428,7 @@ details:not([open]) .src-list{display:none}
       <a class="cta-btn" href="data/" style="background:var(--bg2);border:1px solid var(--border);color:var(--text);padding:8px 15px;border-radius:6px;font:600 12px sans-serif;text-decoration:none;transition:all .15s">Download open data →</a>
     </div>
 
-    <p style="font-size:11px;color:var(--muted);margin-top:22px;line-height:1.5">2026-05-11 · CC BY-NC 4.0 · open methodology at <a href="methodology.html" style="color:var(--blue)">methodology.html</a> · open data <a href="data/" style="color:var(--blue)">CSVs</a> · clone &amp; fork at <a href="https://github.com/Ashwask/india-water-canvas" style="color:var(--blue)" target="_blank">Ashwask/india-water-canvas</a> · all numbers ±30% directional</p>
+    <p style="font-size:11px;color:var(--muted);margin-top:22px;line-height:1.5">CC BY-NC 4.0 · <a href="methodology.html" style="color:var(--blue)">methodology</a> · <a href="data/" style="color:var(--blue)">open data</a> · <a href="https://github.com/Ashwask/india-water-canvas" style="color:var(--blue)" target="_blank">source</a> · numbers ±30% directional</p>
   </div>
 </section>
 
@@ -429,8 +439,7 @@ details:not([open]) .src-list{display:none}
       <div class="live-badge"><span class="live-dot"></span> Investment Thesis Dashboard</div>
       <h1 class="main-title">India Water System — <span>Water Canvas</span></h1>
       <p class="subtitle">National Ecosystem Intelligence · Systems Mapping · Unit Economics · Pan-India Actor Landscape</p>
-      <p style="font-size:13px;color:var(--muted);margin-top:14px;max-width:680px;line-height:1.7">India holds <strong style="color:var(--text)">4% of global freshwater for 18% of global population</strong>, runs on <strong style="color:var(--text)">~25% of all groundwater extracted globally</strong>, and is poised to cross water scarcity (≤1,000 m³/capita/yr) by 2030 on current trajectory. The state spends <strong style="color:var(--text)">₹2.5–3.5 L cr/yr</strong> across schemes (the Ministry of Jal Shakti alone was allocated <strong style="color:var(--text)">₹94,808 cr in FY2026-27</strong>, with JJM at ₹67,670 cr the second-largest centrally sponsored scheme after MGNREGA); <strong style="color:var(--text)">~₹3,000–5,000 cr/yr</strong> of that disbursement does not produce its claimed outcome. This canvas maps the system: water signals, infrastructure gaps, unit economics, the funder ecosystem, and the institutional vehicle that does not yet exist. Anchored to JJM 2.0 ₹8.69 L cr (Mar 2026), CGWB Dynamic GW Resources 2025, ICIMOD, CAG 2022 + 2024, 16th Finance Commission (tabled Feb 2026), MCA CSR FY25.</p>
-      <p style="font-size:11px;color:var(--muted);margin-top:10px">Open data · CC BY-NC 4.0 · Leaflet · D3 · Chart.js · OpenStreetMap · prose-first internal strategy</p>
+      <p style="font-size:13px;color:var(--muted);margin-top:14px;max-width:680px;line-height:1.7">India holds <strong style="color:var(--text)">4% of the world's freshwater for 18% of its people</strong> and extracts <strong style="color:var(--text)">~25% of all groundwater globally</strong>. Government spends <strong style="color:var(--text)">₹2.5-3.5 L cr/yr</strong> on water schemes (Jal Shakti alone got ₹94,808 cr in FY2026-27); an estimated <strong style="color:var(--text)">₹3,000-5,000 cr/yr</strong> never produces its claimed outcome. This canvas maps where water is in trouble, what it costs to fix, and who is working on it.</p>
     </div>
     <div style="text-align:right">
       <div class="clock" id="clock">--:--:-- --</div>
@@ -462,7 +471,7 @@ details:not([open]) .src-list{display:none}
 </div>
 <section id="place-explorer" class="section fade-in">
   <div class="section-title">Pick a place · see what's true there</div>
-  <p style="font-size:13px;color:var(--muted);margin-bottom:14px;max-width:780px;line-height:1.6">Pick a place. See its three axes — <strong style="color:#FF5252">Health</strong> (water quality + ecosystem state), <strong style="color:#FFAB40">Availability</strong> (water quantity + reliability), <strong style="color:#4FC3F7">Impact</strong> (people + economy + climate exposure). Then see the binding feedback loop and the specific intervention this place needs.</p>
+  <p style="font-size:13px;color:var(--muted);margin-bottom:14px;max-width:780px;line-height:1.6">Pick a place to see its three axes — <strong style="color:#FF5252">Health</strong> (quality), <strong style="color:#FFAB40">Availability</strong> (quantity), <strong style="color:#4FC3F7">Impact</strong> (people + exposure) — plus its binding loop and the intervention it needs.</p>
 
   <div class="map-mode-bar" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;align-items:center">
     <span style="font:500 11px/1 sans-serif;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);margin-right:6px">Map mode</span>
@@ -503,7 +512,7 @@ details:not([open]) .src-list{display:none}
     <span>What's moving · year over year</span>
     <span id="movement-context-pill" style="font:700 10px sans-serif;text-transform:uppercase;letter-spacing:.5px;color:var(--teal);background:rgba(0,191,165,.12);border:1px solid var(--teal);border-radius:4px;padding:3px 9px">All-India baseline</span>
   </div>
-  <p style="font-size:13px;color:var(--muted);max-width:780px;line-height:1.7;margin-bottom:14px">Seven things that should be moving · year over year. The dots beside each show how confident we are in the data: ●●● strong · ●●○ partial · ●○○ thin · — not yet tracked.</p>
+  <p style="font-size:13px;color:var(--muted);max-width:780px;line-height:1.7;margin-bottom:14px">Seven things that should be moving, year over year. Dots = data confidence (●●● strong to ●○○ thin).</p>
   <div id="movement-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px"></div>
 </section>
 
@@ -511,7 +520,7 @@ details:not([open]) .src-list{display:none}
 <!-- ============ TRENDS — Three decades ============ -->
 <section id="trends" class="section fade-in" style="background:linear-gradient(180deg,#0D1117 0%,#0d1620 50%,#0D1117 100%)">
   <div class="section-title">How we got here · 1995 → 2025</div>
-  <p style="font-size:13px;color:var(--muted);margin-bottom:6px;max-width:780px;line-height:1.7">India's water health on every dimension where we have data. <strong style="color:var(--text)">All lines indexed to 1995 = 100.</strong> Lower = worse. The eye should land on one thing: every layer of the system has degraded together — aquifers, rivers, lakes, glaciers — while scheme spend has multiplied 5×.</p>
+  <p style="font-size:13px;color:var(--muted);margin-bottom:6px;max-width:780px;line-height:1.7">Every dimension indexed to <strong style="color:var(--text)">1995 = 100</strong> (lower = worse). Aquifers, rivers, lakes and glaciers degrade together, even as scheme spend multiplied 5×.</p>
   <p style="font-size:11px;color:var(--muted);margin-bottom:18px">Source: CGWB GEC cycles · CWC · CPCB river-stretch counts · DPCC + CPCB Yamuna BOD · Bengaluru tank inventory (urban research) · ICIMOD HKH glacier mass loss · NWIA 1992-93 + 2011 · scheme outlay (PIB / MoJS).</p>
 
   <!-- HERO chart -->
@@ -684,19 +693,22 @@ details:not([open]) .src-list{display:none}
     <div class="action-grid" id="whitespace-seeds-grid"></div>
   </div>
 
-  <div style="margin-top:24px">
-    <div class="section-title" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px"><span>Who sells solutions · including failures</span><span style="font:700 10px sans-serif;text-transform:uppercase;letter-spacing:.5px;color:var(--muted)">30 entries</span></div>
-    <p style="font-size:12px;color:var(--muted);margin-bottom:10px;line-height:1.6">For-profit market actors providing water goods/services. Operational + failed (full canon: Sarvajal · Spring Health · Naandi · Waterlife) displayed alongside. Filter by state · sort by water-body specialty.</p>
+  <details class="collapse" style="margin-top:24px">
+    <summary>Who sells solutions, including failures <span class="ct">· 30 market actors · tap to open</span></summary>
+    <div class="collapse-body">
+    <p style="font-size:12px;color:var(--muted);margin-bottom:10px;line-height:1.6">For-profit water goods/services, operational and failed (Sarvajal · Spring Health · Naandi · Waterlife). Filter by state · sort by specialty.</p>
     <div id="market-here" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px"></div>
-  </div>
+    </div>
+  </details>
 </section>
 
 <span id="measure" class="spine-anchor"></span><span id="measurement" class="spine-anchor" aria-hidden="true"></span>
 <!-- ============ MEASUREMENT (decision gates + 12 hard questions + capture envelope + uncertainty) ============ -->
 <section id="measurement-section" class="section fade-in" data-relevant="philanthropy cso ngo">
-  <div class="section-title">How we measure progress — or the lack of it</div>
-  <p style="font-size:13px;color:var(--muted);margin-bottom:16px;max-width:780px;line-height:1.7">A public-good artefact must be falsifiable. Below: four decision gates with explicit pass criteria and posture-if-failed; twelve structural hard questions, each with a "what would change my mind" test; the capture envelope tracker; and the author's own uncertainty disclosure.</p>
-
+  <div class="section-title">How we measure progress, or the lack of it</div>
+  <details class="collapse">
+    <summary>4 decision gates · 12 hard questions · capture-envelope tracker · uncertainty disclosure <span class="ct">· tap to open</span></summary>
+    <div class="collapse-body">
   <h3 style="font:700 11px sans-serif;text-transform:uppercase;letter-spacing:.6px;color:var(--teal);margin:18px 0 10px">Four decision gates · Y0 / Y2 / Y5 / Y10</h3>
   <div class="gates-grid">
     <div class="gate">
@@ -768,19 +780,28 @@ details:not([open]) .src-list{display:none}
       <li><strong style="color:var(--text)">JJM functionality rate:</strong> ±10% (CAG flagged 40-55%; field surveys range)</li>
     </ul>
   </div>
+    </div>
+  </details>
 </section>
 
 <!-- ============ HIDDEN DYNAMICS ============ -->
 <section id="hidden-dynamics" data-relevant="cso philanthropy csr corporate" class="section fade-in">
   <div class="section-title">What the numbers hide</div>
-  <p style="font-size:12px;color:var(--muted);margin-bottom:18px;max-width:700px;line-height:1.6">Eight structural patterns the official dashboards and scheme reports do not surface. Each is named, severity-rated, and explains <em>why it matters</em> for an investment-grade decision.</p>
+  <details class="collapse">
+    <summary>8 structural patterns official dashboards don't surface, severity-rated <span class="ct">· tap to open</span></summary>
+    <div class="collapse-body">
   <div class="hd-grid" id="hd-grid"></div>
+    </div>
+  </details>
 </section>
 
 <!-- ============ INTERSECTIONS ============ -->
 <section id="intersections" class="section fade-in">
   <div class="section-title">Where water meets the rest</div>
-  <p style="font-size:12px;color:var(--muted);margin-bottom:10px;max-width:780px;line-height:1.6">Water is not a sector. It is the substrate every other sector consumes, contaminates, and depends on. <strong style="color:var(--text)">Click a state in Place Explorer above</strong> — the relevant case cards spotlight + numbers re-anchor here.</p>
+  <p style="font-size:12px;color:var(--muted);margin-bottom:10px;max-width:780px;line-height:1.6">Water is the substrate every other sector consumes, contaminates, and depends on. Click a state in the map above, then open this to see the case cards re-anchor.</p>
+  <details class="collapse">
+    <summary>Water × energy · waste · markets · climate · health · geopolitics, case cards per state <span class="ct">· tap to open</span></summary>
+    <div class="collapse-body">
   <div id="intersection-place-bar" style="background:var(--bg2);border:1px solid var(--border);border-left:3px solid var(--teal);border-radius:8px;padding:14px 18px;margin-bottom:14px">
     <div style="display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:10px">
       <div>
@@ -1050,6 +1071,8 @@ details:not([open]) .src-list{display:none}
       <div style="font-size:13px;line-height:1.6;color:var(--text)"><strong>R6 climate non-stationarity → tribunal litigation</strong> (primary across Cauvery + Krishna + Godavari + Mahadayi + Yamuna + Mahanadi + Ravi-Beas) · downstream cascade for transboundary · all the loops above hit the constitutional federalism wall here</div>
     </div>
   </div>
+    </div>
+  </details>
 </section>
 
 <!-- (v2.0: #act-section will be rebuilt as #action drawer in Step 8) -->
@@ -1060,7 +1083,9 @@ details:not([open]) .src-list{display:none}
 <!-- ============ INSIGHTS · 6 unobvious reads ============ -->
 <section id="insights-section" class="section fade-in" data-relevant="cso ngo philanthropy csr corporate" style="background:linear-gradient(180deg,#0D1117 0%,#0d1620 50%,#0D1117 100%)">
   <div class="section-title">Six things that don't add up when you read this all together</div>
-  <p style="font-size:13px;color:var(--muted);margin-bottom:14px;max-width:780px;line-height:1.7">What reading this artefact reveals that the prose folder, the partner map, and the underlying source documents bury when read separately. These are the synthesis claims that make the artefact worth an hour.</p>
+  <details class="collapse">
+    <summary>6 synthesis reads the source documents bury when read apart <span class="ct">· tap to open</span></summary>
+    <div class="collapse-body">
   <div class="insights-grid">
     <div class="insight">
       <div class="insight-num">01</div>
@@ -1099,6 +1124,8 @@ details:not([open]) .src-list{display:none}
       <div class="insight-evidence">Evidence: vernacular vocabulary (eri, ahar-pyne, kuhl, baoli, oran, johad, naula, dhara) eroding; canon (Agarwal+Narain 1997, Mishra 1994, Ramesh 2024) reaches &lt;500K readers; 14-state curriculum + 5K-school pilot is the unbuilt civic infrastructure</div>
     </div>
   </div>
+    </div>
+  </details>
 </section>
 
 
@@ -1106,7 +1133,7 @@ details:not([open]) .src-list{display:none}
   <div style="border-top:1px solid var(--border);padding-top:28px">
     <div style="font:700 11px sans-serif;text-transform:uppercase;letter-spacing:.7px;color:var(--teal);margin-bottom:6px">§3.5 · the adapt zone</div>
     <h2 style="font:700 clamp(22px,3vw,30px)/1.2 Georgia,serif;color:var(--text);margin:0 0 6px;letter-spacing:-.01em">Adaptation + Mitigation · climate-aware</h2>
-    <p style="font-size:13px;color:var(--muted);max-width:680px;line-height:1.6;margin:0">Two parallel tracks. <strong style="color:var(--text)">Adapt</strong> · respond to climate impacts already underway (drought · cryosphere · flood · salinity · urban Day-Zero). <strong style="color:var(--text)">Mitigate</strong> · reduce the root causes (over-extraction · pollution · energy-water nexus · greenwashing). Strategies highlight when relevant to the active place.</p>
+    <p style="font-size:13px;color:var(--muted);max-width:680px;line-height:1.6;margin:0">Two tracks: <strong style="color:var(--text)">adapt</strong> to impacts already underway (drought, cryosphere, flood, salinity, Day-Zero) and <strong style="color:var(--text)">mitigate</strong> root causes (over-extraction, pollution, energy-water nexus). Strategies highlight for the active place.</p>
   </div>
 </div>
 <span id="adapt" class="spine-anchor"></span>
@@ -1143,7 +1170,7 @@ details:not([open]) .src-list{display:none}
     <span>Where claims don't match reality</span>
     <span style="font:700 10px sans-serif;text-transform:uppercase;letter-spacing:.5px;color:#FFAB40;background:rgba(255,171,64,.12);border:1px solid #FFAB40;border-radius:4px;padding:3px 9px"><span id="audit-claim-count">0</span> claims · refresh every 3 months · grows on contribution</span>
   </div>
-  <p style="font-size:13px;color:var(--muted);max-width:780px;line-height:1.7;margin-bottom:14px">When official numbers don't match what's actually happening on the ground · we surface the gap. Six ways water claims get tested: tap coverage vs functional rate · corporate water-positive vs third-party audit · pollution monitoring required vs actually publishing · scheme spend vs measurable outcome · pledged capital vs deployed · falsifiable claims tested year-on-year.</p>
+  <p style="font-size:13px;color:var(--muted);max-width:780px;line-height:1.7;margin-bottom:14px">Each claim below pairs the official number with what the audit shows, across six tracks.</p>
   <div id="audit-lanes" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:12px"></div>
 </section>
 
