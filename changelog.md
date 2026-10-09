@@ -6,6 +6,14 @@ The current version is reflected in the dashboard footer + `CITATION.cff`.
 
 ---
 
+## v2.4 · 2026-10-10
+
+**Performance + a real auto-update mechanism.**
+
+- **Faster first paint:** the four render-blocking libraries (Chart.js, Leaflet, D3, d3-sankey) moved out of `<head>` to just above the app script, so the ~1,200 lines of page content paint before the libraries block. Added `preconnect` / `dns-prefetch` hints for the CDN and OSM-tile origins. Map, charts and Sankey verified unchanged.
+- **Daily source-watch** (`.github/workflows/source-watch.yml` + `scripts/check-sources.mjs` + `data/source-watch.json`): a scheduled job re-checks the official / machine-readable sources behind the headline figures and opens a GitHub Issue only when one **actually** changes. It never edits the dashboard or auto-commits data. Authoritative feed = the `urbanmorph/schemes` Union Budget register (JJM / AMRUT / PMKSY / Ganga); CGWB + budget portal watched best-effort. Honest by design: annual government data does not change daily, so most days the job is a no-op.
+- **Client-side 24h refresh:** a left-open dashboard tab reloads itself every 24h when idle, to stay in sync with the latest deploy.
+
 ## v2.3 · 2026-10-09
 
 **Readability pass: cut the cognitive overload.** The single-scroll page had stacked walls of prose on top of the data. Reduced the written content and introduced progressive disclosure so the default view is calm and detail is one click away.

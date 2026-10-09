@@ -1,0 +1,46 @@
+{
+  "_comment": "Watchlist for scripts/check-sources.mjs. Each source has a fingerprint (lastSeen) captured when its figure was last vetted into the dashboard. The daily workflow flags a source only when its fingerprint actually moves. 'json' feeds are authoritative and low-noise; 'hash' pages are best-effort (gov portals often block bots or render client-side, so they stay null until a CI run reaches them and never false-flag).",
+  "lastRun": "2026-10-09",
+  "sources": [
+    {
+      "id": "schemes-budget-totals",
+      "label": "Union Budget scheme allocations — reconciled totals (urbanmorph/schemes register)",
+      "url": "https://raw.githubusercontent.com/urbanmorph/schemes/main/data/budget/_totals.json",
+      "match": "json",
+      "lastSeen": "a7d47f8a63804cd6",
+      "lastChecked": "2026-10-09",
+      "dashboardFigure": "Stmt 4A sum ₹5,48,797.73 cr; 4B sum ₹17,71,928.28 cr (FY2026-27)",
+      "note": "Authoritative machine-readable feed; moves when a new budget cycle is parsed."
+    },
+    {
+      "id": "schemes-budget-4a",
+      "label": "Union Budget — centrally sponsored scheme lines (Stmt 4A, urbanmorph/schemes)",
+      "url": "https://raw.githubusercontent.com/urbanmorph/schemes/main/data/budget/2026/stat4a.json",
+      "match": "json",
+      "lastSeen": "f8c7926ef1b4740f",
+      "lastChecked": "2026-10-09",
+      "dashboardFigure": "JJM ₹67,670 cr; AMRUT ₹8,000 cr; PMKSY ₹6,587+2,500 cr (FY2026-27)",
+      "note": "Moves when FY2026-27 numbers are revised or a new fiscal year is published. Also the JJM budget signal."
+    },
+    {
+      "id": "cgwb-gw-assessment",
+      "label": "CGWB — Ground Water Resource Assessment landing page",
+      "url": "https://cgwb.gov.in/en/ground-water-resource-assessment-0",
+      "match": "hash",
+      "lastSeen": null,
+      "lastChecked": "2026-10-09",
+      "dashboardFigure": "Dynamic GW Resources 2025: 730/6,762 units over-exploited (10.8%), stage 60.6%",
+      "note": "Best-effort: flags when the assessment page changes (e.g. a new annual report is linked). Blocked from some IPs; baselines on first successful CI fetch."
+    },
+    {
+      "id": "india-budget-portal",
+      "label": "Union Budget portal (indiabudget.gov.in)",
+      "url": "https://www.indiabudget.gov.in/",
+      "match": "hash",
+      "lastSeen": null,
+      "lastChecked": "2026-10-09",
+      "dashboardFigure": "FY2026-27 Expenditure Budget (Stmt 4A/4B)",
+      "note": "Best-effort: flags around a new budget release so the budget feed can be re-pulled."
+    }
+  ]
+}

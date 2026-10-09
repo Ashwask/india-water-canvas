@@ -4,12 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>India Water System — Water Canvas</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preconnect" href="https://unpkg.com" crossorigin>
+<link rel="preconnect" href="https://d3js.org" crossorigin>
+<link rel="dns-prefetch" href="https://tile.openstreetmap.org">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="https://d3js.org/d3.v7.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/d3-sankey@0.12.3/dist/d3-sankey.min.js"></script>
-<script src="india_geo.js"></script>
 <style>
 :root{--bg:#0D1117;--bg2:#161B22;--bg3:#1C2230;--bg4:#21262D;--teal:#00BFA5;--amber:#FFB300;--coral:#FF5252;--green:#69F0AE;--purple:#CE93D8;--blue:#4FC3F7;--orange:#FFAB40;--text:#E6EDF3;--muted:#8B949E;--border:#30363D}
 *{box-sizing:border-box;margin:0;padding:0}
@@ -1233,6 +1232,12 @@ details.collapse>summary:hover{background:var(--bg3)}
 
 <a id="submit-correction" href="https://github.com/Ashwask/india-water-canvas/issues/new?labels=correction&title=%5BCorrection%5D+&body=Section%3A+%0AClaim%3A+%0ASource%3A+%0AProposed+correction%3A+" target="_blank" rel="noopener">⚠ Submit a correction</a>
 
+<!-- Libraries loaded here (not in <head>) so page content paints before they block -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3-sankey@0.12.3/dist/d3-sankey.min.js"></script>
+<script src="india_geo.js"></script>
 <script>
 // ============================================================
 // DATA
@@ -4476,6 +4481,23 @@ if(typeof updateNextStep==='function')updateNextStep(null);
     </div>
   </div>
 </footer>
+
+<script>
+// Auto-refresh: reload every 24h so a left-open dashboard stays in sync with the
+// daily source-check / redeploy. Reloads only when the tab is hidden or idle to
+// avoid interrupting an active reader; checks hourly whether 24h have elapsed.
+(function(){
+  var DAY=86400000, loadedAt=Date.now();
+  function due(){ return (Date.now()-loadedAt)>=DAY; }
+  function maybeReload(){
+    if(!due()) return;
+    // only reload when the user isn't actively looking, else defer
+    if(document.hidden){ try{ location.reload(); }catch(e){} }
+  }
+  setInterval(maybeReload, 3600000);               // check hourly
+  document.addEventListener('visibilitychange', function(){ if(document.hidden) maybeReload(); });
+})();
+</script>
 
 </body>
 </html>
