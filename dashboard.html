@@ -261,6 +261,11 @@ details.collapse[open]>summary::after{content:'▴ hide'}
 details.collapse>summary:hover{background:var(--bg3)}
 .collapse-body{padding:4px 16px 14px;border-top:1px solid var(--border)}
 
+/* Per-section data-freshness stamp (honest "last updated" per section) */
+.freshness{font-size:10px;color:var(--muted);margin:1px 0 12px;display:flex;align-items:center;gap:6px;line-height:1.5;flex-wrap:wrap}
+.freshness strong{color:var(--teal);font-weight:700}
+.freshness .fdot{width:6px;height:6px;border-radius:50%;background:var(--teal);flex:none;box-shadow:0 0 0 3px rgba(0,191,165,.15)}
+
 /* Insights grid */
 .insights-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin:14px 0}
 .insight{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:18px 20px;border-top:3px solid var(--teal);transition:transform .2s}
@@ -367,7 +372,7 @@ details.collapse>summary:hover{background:var(--bg3)}
   <select id="sel-geo" onchange="onGeoChange()" style="display:none"><option value="">Select…</option></select>
   <span class="geo-badge" id="geo-badge">🇮🇳 National View</span>
   <button class="reset-btn" onclick="resetGeo()">↺ Reset</button>
-  <span style="margin-left:auto;font-size:10px;color:var(--muted)">CGWB 2025 · CWC · CPCB 2025 · IMD · ICIMOD · JJM dashboard 2026 · CAG audits 2022, 2024 · 16th FC (tabled Feb 2026) · Union Budget FY2026-27 · MCA CSR FY25 · OpenStreetMap · data refreshed Oct 2026</span>
+  <span style="margin-left:auto;font-size:10px;color:var(--muted)">CGWB 2025 · CWC · CPCB 2025 · IMD · ICIMOD · JJM dashboard 2026 · CAG audits 2022, 2024 · 16th FC (tabled Feb 2026) · Union Budget FY2026-27 · MCA CSR FY25 · OpenStreetMap · data refreshed Oct 2026 · auto-refreshes every 24h · sources watched daily</span>
 </div>
 
 <!-- Single next-step pill · architecture: one suggestion not seven · context-aware -->
@@ -4481,6 +4486,48 @@ if(typeof updateNextStep==='function')updateNextStep(null);
     </div>
   </div>
 </footer>
+
+<script>
+// Per-section data-freshness stamps: every data section shows when its data was last
+// updated and from which source. Kept current by the 24h client refresh + the daily
+// source-watch workflow. Honest provenance, not a fake live feed.
+(function(){
+  var F={
+    'overview':{as:'Oct 2026', src:'CGWB 2025 · CPCB 2025 · JJM 2026 · Union Budget FY2026-27'},
+    'place-explorer':{as:'May 2026', src:'per-state H/A/I composites (CGWB · CPCB · IMD · NFHS)'},
+    'movement-axes':{as:'2025', src:'7-axis trajectory (CGWB · CWC · CPCB · CAG)'},
+    'trends':{as:'2025', src:'1995 to 2025 series (CGWB · CWC · CPCB · ICIMOD)'},
+    'system-flows':{as:'2026', src:'CWC + CGWB water balance (BCM, directional)'},
+    'economics-gaps':{as:'Oct 2026', src:'Union Budget FY2026-27 (Stmt 4A/4B) · build-plan capex'},
+    'compare-section':{as:'May 2026', src:'per-state H/A/I composites'},
+    'ecosystem':{as:'Oct 2026', src:'Union Budget FY27 · MCA CSR FY25 · partner self-report'},
+    'measurement-section':{as:'Oct 2026', src:'CAG · decision gates · hard questions'},
+    'hidden-dynamics':{as:'2026', src:'structural reads (slow-moving)'},
+    'intersections':{as:'2026', src:'cross-sector case data'},
+    'insights-section':{as:'2026', src:'synthesis of the above'},
+    'adapt-section':{as:'2026', src:'IMD · ICIMOD · place strategies'},
+    'audit-section':{as:'Oct 2026', src:'AUDIT_CLAIMS ledger (per-claim dates)'}
+  };
+  function stamp(checked){
+    Object.keys(F).forEach(function(id){
+      var sec=document.getElementById(id); if(!sec) return;
+      var title=sec.querySelector('.section-title'); if(!title) return;
+      if(title.nextElementSibling && title.nextElementSibling.className==='freshness') return;
+      var f=F[id];
+      var el=document.createElement('div');
+      el.className='freshness';
+      el.innerHTML='<span class="fdot"></span>Data as of <strong>'+f.as+'</strong> · '+f.src
+        +' · auto-refreshes every 24h'+(checked?(' · sources checked '+checked):'');
+      title.insertAdjacentElement('afterend', el);
+    });
+  }
+  function go(){
+    fetch('data/source-watch.json',{cache:'no-store'}).then(function(r){return r.ok?r.json():null;})
+      .then(function(j){ stamp(j&&j.lastRun); }).catch(function(){ stamp(null); });
+  }
+  if(document.readyState!=='loading') go(); else document.addEventListener('DOMContentLoaded', go);
+})();
+</script>
 
 <script>
 // Auto-refresh: reload every 24h so a left-open dashboard stays in sync with the

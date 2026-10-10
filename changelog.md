@@ -6,6 +6,10 @@ The current version is reflected in the dashboard footer + `CITATION.cff`.
 
 ---
 
+## v2.5 · 2026-10-10
+
+**Per-section freshness stamps: every data section is now timestamped.** Under each section title a line shows `Data as of <date> · <source vintage> · auto-refreshes every 24h · sources checked <date>`. The "sources checked" date is read live from `data/source-watch.json` (the daily watcher's last run), so the page honestly shows how current each block is: national headlines Oct 2026 (CGWB 2025 / CPCB 2025 / JJM 2026 / Budget FY27), per-state composites May 2026, trends 1995 to 2025, etc. The global header line now states "auto-refreshes every 24h · sources watched daily". No fake live feed: honest provenance kept fresh by the 24h client reload + the daily source-watch workflow.
+
 ## v2.4 · 2026-10-10
 
 **Performance + a real auto-update mechanism.**
