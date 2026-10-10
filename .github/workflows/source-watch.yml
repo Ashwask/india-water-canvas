@@ -1,0 +1,55 @@
+name: source-watch
+
+# Daily watcher: re-checks the official / machine-readable sources behind the
+# dashboard's headline figures and opens a GitHub Issue only when one ACTUALLY
+# changes, so a human can refresh the baked data. It never edits the dashboard
+# and never auto-commits data. See scripts/check-sources.mjs + data/source-watch.json.
+
+on:
+  schedule:
+    - cron: '17 6 * * *'   # 06:17 UTC daily (~11:47 IST)
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: source-watch
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Check sources for updates
+        id: check
+        continue-on-error: true
+        run: node scripts/check-sources.mjs --check
+
+      - name: Flag via issue when a source changed
+        if: steps.check.outcome == 'failure'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const body = fs.readFileSync('source-watch-report.md', 'utf8');
+            const owner = context.repo.owner, repo = context.repo.repo;
+            try {
+              await github.rest.issues.createLabel({ owner, repo, name: 'source-update', color: 'FBCA04',
+                description: 'An upstream data source changed; refresh the dashboard' });
+            } catch (e) { /* label already exists */ }
+            const { data: open } = await github.rest.issues.listForRepo({
+              owner, repo, state: 'open', labels: 'source-update' });
+            const title = 'Source update detected — refresh the dashboard';
+            if (open.length) {
+              await github.rest.issues.createComment({ owner, repo, issue_number: open[0].number, body });
+            } else {
+              await github.rest.issues.create({ owner, repo, title, body, labels: ['source-update'] });
+            }

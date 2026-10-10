@@ -6,6 +6,28 @@ The current version is reflected in the dashboard footer + `CITATION.cff`.
 
 ---
 
+## v2.5 · 2026-10-10
+
+**Per-section freshness stamps: every data section is now timestamped.** Under each section title a line shows `Data as of <date> · <source vintage> · auto-refreshes every 24h · sources checked <date>`. The "sources checked" date is read live from `data/source-watch.json` (the daily watcher's last run), so the page honestly shows how current each block is: national headlines Oct 2026 (CGWB 2025 / CPCB 2025 / JJM 2026 / Budget FY27), per-state composites May 2026, trends 1995 to 2025, etc. The global header line now states "auto-refreshes every 24h · sources watched daily". No fake live feed: honest provenance kept fresh by the 24h client reload + the daily source-watch workflow.
+
+## v2.4 · 2026-10-10
+
+**Performance + a real auto-update mechanism.**
+
+- **Faster first paint:** the four render-blocking libraries (Chart.js, Leaflet, D3, d3-sankey) moved out of `<head>` to just above the app script, so the ~1,200 lines of page content paint before the libraries block. Added `preconnect` / `dns-prefetch` hints for the CDN and OSM-tile origins. Map, charts and Sankey verified unchanged.
+- **Daily source-watch** (`.github/workflows/source-watch.yml` + `scripts/check-sources.mjs` + `data/source-watch.json`): a scheduled job re-checks the official / machine-readable sources behind the headline figures and opens a GitHub Issue only when one **actually** changes. It never edits the dashboard or auto-commits data. Authoritative feed = the `urbanmorph/schemes` Union Budget register (JJM / AMRUT / PMKSY / Ganga); CGWB + budget portal watched best-effort. Honest by design: annual government data does not change daily, so most days the job is a no-op.
+- **Client-side 24h refresh:** a left-open dashboard tab reloads itself every 24h when idle, to stay in sync with the latest deploy.
+
+## v2.3 · 2026-10-09
+
+**Readability pass: cut the cognitive overload.** The single-scroll page had stacked walls of prose on top of the data. Reduced the written content and introduced progressive disclosure so the default view is calm and detail is one click away.
+
+- **Top trimmed hard:** removed duplicate titles, persona-era copy (personas were retired at v2.0), the stale "v1.0 / 2026-05-11" tags and the redundant tech-stack line; the intro paragraph went from ~8 lines to 3; hero sub is now one line.
+- **Heavy text sections collapsed** behind native `<details>` toggles (nothing deleted, one click to open): *Six things that don't add up*, *How we measure progress* (gates + 12 hard questions + capture tracker + uncertainty), *What the numbers hide*, *Where water meets the rest* (intersections), and the *Who sells solutions* market grid.
+- **Verbose intros trimmed** across Place, Movement, Trends, Adapt and Audit; redundant section-vs-zone duplication removed.
+- Data and visualisation sections (map, trend charts, Sankey, partner/funder tables, audit lanes, capex reconciliation) stay visible; only prose was cut or collapsed.
+- New reusable `.collapse` component (native details, file:// safe). Verified via headless Chrome: page is markedly shorter, all toggles render, map + charts intact.
+
 ## v2.2.1 · 2026-10-07
 
 **Map boundaries upgraded to official LGD lineage (via Bharatlas / urbanmorph/geodata).** The choropleth previously used state polygons dissolved from a community district file (udit-001) via mapshaper. Replaced with the Local Government Directory (LGD) state set from the Bharatlas open catalog (bharatlas.com), the same source already cited in the dashboard. Rebuilt `india_geo.js` (inline `INDIA_GEOJSON`) + `india_states_simple.geojson` from `LGD_States.geojson`, simplified visvalingam 0.4% + precision 0.01 via mapshaper (~65 KB each, all 36 states/UTs). Property `st_nm` mapped to the dashboard's exact names so it is a drop-in (no STATE_ALIAS changes). Verified live via headless Chrome: full choropleth renders, every state colours by status.

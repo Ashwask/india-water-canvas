@@ -50,6 +50,16 @@ National headline figures rolled to the latest authoritative releases (full deta
 
 Reader-test outreach: see [`outreach-templates.md`](outreach-templates.md).
 
+## Staying current
+
+The headline figures come from sources that update annually or a few times a year (CGWB groundwater, CPCB rivers, the Union Budget, JJM), not daily. So instead of faking a live feed, the repo watches the sources and flags a real change:
+
+- **Daily source-watch** ([`.github/workflows/source-watch.yml`](.github/workflows/source-watch.yml) + [`scripts/check-sources.mjs`](scripts/check-sources.mjs)) re-checks the machine-readable feeds each day and opens a GitHub Issue labelled `source-update` **only when a monitored source actually changes**. It never edits the dashboard or auto-commits data. The watchlist and last-vetted fingerprints live in [`data/source-watch.json`](data/source-watch.json).
+  - Authoritative, low-noise: the Union Budget scheme allocations via the [`urbanmorph/schemes`](https://india-schemes.pages.dev/) register (covers JJM / AMRUT / PMKSY / Ganga outlays).
+  - Best-effort: CGWB and the Union Budget portal (gov sites that often block bots; they arm once a run can reach them, and never false-flag).
+  - After a flagged source is verified and the dashboard updated, run `node scripts/check-sources.mjs --baseline` to re-arm the watch.
+- **Client-side refresh:** a left-open dashboard tab reloads itself every 24h (when idle) so it stays in sync with the latest deploy.
+
 ## Contribute
 
 Every blank field in the dashboard has a "contribute →" link routing to a pre-filled GitHub issue. 14-day response commitment from the maintainer.
